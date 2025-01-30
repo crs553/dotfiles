@@ -1,3 +1,7 @@
-btop/btop.log
-Mullvad\ VPN
+# Top level folder
 audacity
+FreeCAD
+Mullvad\ VPN
+
+# Specific Files
+btop/btop.log
