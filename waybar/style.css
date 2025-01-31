@@ -1,3 +1,5 @@
+@import "catpuccin-mocha.css";
+
 * {
     border: none;
     border-radius: 0px;
@@ -10,43 +12,43 @@
 
 window#waybar {
     background: rgba(21, 18, 27, 0);
-    color: #cdd6f4;
+    color: @text;
 }
 
 tooltip {
-    background: #1e1e2e;
+    background: @base;
     border-radius: 10px;
     border-width: 1.5px;
     border-style: solid;
-    border-color: #11111b;
+    border-color: @crust;;
     transition: 0.3s;
 }
 
 #workspaces button {
     padding: 5px;
-    color: #313244;
+    color: @surface0;    
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: @subtext0;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
-    background: #eba0ac;
+    color: @subtext0;
+    background: @maroon;
     border-radius: 20px;
 }
 
 #workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
+    color: @crust;
+    background: @green;
     border-radius: 20px;
 }
 
 #workspaces button:hover {
-    background: #11111b;
-    color: #cdd6f4;
+    background: @crust;
+    color: @text;
     border-radius: 20px;
 }
 
@@ -65,12 +67,12 @@ tooltip {
 #workspaces,
 #tray,
 #backlight {
-    background: #1e1e2e;
+    background: @base;
     opacity: 0.8;
     padding: 0px 10px;
     margin: 0;
     margin-top: 5px;
-    border: 1px solid #181825;
+    border: 1px solid @mantle;
 }
 
 #temperature {
@@ -78,7 +80,7 @@ tooltip {
 }
 
 #temperature.critical {
-    color: #eba0ac;
+    color: @maroon;
 }
 
 #backlight {
@@ -93,7 +95,7 @@ tooltip {
 }
 
 #workspaces {
-    background: #1e1e2e;
+    background: @base;
     border-radius: 20px;
     margin-left: 5px;
     padding-right: 0px;
@@ -101,7 +103,7 @@ tooltip {
 }
 
 #custom-power_profile {
-    color: #a6e3a1;
+    color: @green;
     border-left: 0px;
     border-right: 0px;
 }
@@ -113,7 +115,7 @@ tooltip {
 }
 
 #clock {
-    color: #fab387;
+    color: @peach;
     border-radius: 20px;
     margin-left: 5px;
     border-right: 0px;
@@ -122,20 +124,20 @@ tooltip {
 }
 
 #network {
-    color: #f9e2af;
+    color: @yellow;
     border-radius: 20px 0px 0px 20px;
     border-left: 0px;
     border-right: 0px;
 }
 
 #bluetooth {
-    color: #89b4fa;
+    color: @blue;
     border-radius: 20px;
     margin-right: 10px
 } 
 
 #pulseaudio {
-    color: #89b4fa;
+    color: @blue;
     border-left: 0px;
     border-right: 0px;
 }
@@ -150,7 +152,7 @@ tooltip {
 }
 
 #battery {
-    color: #a6e3a1;
+    color: @green;
     border-radius: 0 20px 20px 0;
     margin-right: 5px;
     border-left: 0px;
