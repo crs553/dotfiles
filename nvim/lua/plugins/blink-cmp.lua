@@ -5,6 +5,8 @@ return {
 
 	version = '*',
 
+	build = "nix run .#build-plugin. --extra-experimental-features nix-command --extra-experimental-features flakes",
+
 	opts = {
 
 		keymap = { preset = 'default' },
