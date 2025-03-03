@@ -4,11 +4,12 @@ return {
         version = "*",
         opts = {
             --[[ things you want to change go here]]
+            size = 90,
             open_mapping = [[<M-i>]],
-            direction = 'horizontal'
+            direction = 'vertical'
         },
-        config = function()
-            require("toggleterm").setup()
+        config = function(_, opts)
+            require("toggleterm").setup(opts)
 
             vim.keymap.set("n", "<M-i>", vim.cmd.ToggleTerm)
             vim.keymap.set("t", "<M-i>", vim.cmd.ToggleTerm)
