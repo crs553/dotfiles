@@ -41,7 +41,7 @@ return {
       -- See the fuzzy documentation for more information
       fuzzy = {
         prebuilt_binaries = {
-          download = false
+          download = true
         },
         implementation = "rust"
       }
