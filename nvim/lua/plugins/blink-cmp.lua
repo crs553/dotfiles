@@ -1,15 +1,15 @@
 return {
   {
     'saghen/blink.cmp',
-    tag="v1.2.0",
+    tag = "v1.2.0",
     -- optional: provides snippets for the snippet source
     dependencies = 'rafamadriz/friendly-snippets',
 
     -- use a release tag to download pre-built binaries
     version = 'v0.*',
     build = {
-      cmd = 'cargo +nightly build --release',
-      timeout = 600, -- increase 600 seconds to build due to problem with tag v1.2.0
+      cmd = 'cargo +nightly build --release', -- Change if using nix to nix run .#build-plugin
+      timeout = 600,                          -- increase 600 seconds to build due to problem with tag v1.2.0
     },
 
     opts = {
