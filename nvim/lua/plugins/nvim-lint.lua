@@ -3,11 +3,13 @@ return {
   event = { "BufReadPost", "BufWritePost", "InsertLeave" },
   config = function()
     require("lint").linters_by_ft = {
-      --python = { "flake8" },
-      --lua = { "luacheck" },
+      python = { "mypy" },
+      lua = { "luac" },
+      bash = { "bash" },
       --javascript = { "eslint" },
       --typescript = { "eslint" },
       markdown = { "markdownlint" },
+      nix = { "nix" },
       --sh = { "shellcheck" },
     }
 
