@@ -23,7 +23,7 @@ o.inccommand =
 "split"                     -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
 o.wrap = true
 
-vim.cmd.colorscheme "catppuccin-frappe"
+vim.cmd.colorscheme "catppuccin-mocha"
 
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
