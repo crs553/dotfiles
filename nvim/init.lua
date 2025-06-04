@@ -48,3 +48,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+if os.getenv("SSH_CLIENT") or os.getenv("SSH_TTY") then
+  local function my_paste()
+    return function()
+      local content = vim.fn.getreg('"')
+      return vim.split(content, '\n')
+    end
+  end
+
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = my_paste(),
+      ["*"] = my_paste(),
+    },
+  }
+end
