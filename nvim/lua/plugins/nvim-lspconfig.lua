@@ -1,30 +1,25 @@
--- Innstall plugins: mason.nvim, nvim-lspconfig
 return {
   {
     'williamboman/mason.nvim',
     tag = "v2.0.0-rc.2",
-    config = function()
-      require("mason").setup({
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-          }
+    opts = {
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗"
         }
-      })
-    end,
+      }
+    }
   },
   {
     'williamboman/mason-lspconfig.nvim',
     tag = "v2.0.0-rc.1",
     dependencies = { "williamboman/mason.nvim" },
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "pylsp", "marksman", "bashls", "gopls", "lua_ls", "nixd", "black", "mypy", "rust-analyzer" },
-        automatic_installation = true,
-      })
-    end,
+    opts = {
+      ensure_installed = { "pylsp", "marksman", "bashls", "lua_ls", "rust_analyzer", "nix", "harper_ls" },
+      automatic_installation = true,
+    }
   },
   {
     "neovim/nvim-lspconfig",
@@ -32,7 +27,7 @@ return {
     dependencies = {
       {
         "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
+        ft = "lua", -- only load on Lua files
         opts = {
           library = {
             -- See the configuration section for more details
@@ -43,37 +38,43 @@ return {
       },
     },
     config = function()
-      -- autocompletion
+      -- auto-completion
       local capabilities = require('blink.cmp').get_lsp_capabilities()
+      local lspconfig = require("lspconfig")
 
-      -- lua
-      require("lspconfig").lua_ls.setup { capabilites = capabilities }
+      -- grammar checker
+      lspconfig.harper_ls.setup({
+        capabilites = capabilities,
+        dialect = 'British'
+      })
+
+      -- Lua
+      lspconfig.lua_ls.setup({ capabilites = capabilities })
 
       -- python
-      require 'lspconfig'.pylsp.setup {
+      lspconfig.pylsp.setup({
         capabilites = capabilities,
         plugins = {
           black = { enabled = true },
           pyflakes = { enabled = false },
           pycodestyle = { enabled = false },
         }
-
-      }
+      })
 
       -- nixd
-      require 'lspconfig'.nixd.setup { capabilites = capabilities }
+      lspconfig.nixd.setup({ capabilites = capabilities })
 
       -- markdown
-      require 'lspconfig'.marksman.setup { capabilities = capabilities }
+      lspconfig.marksman.setup({ capabilities = capabilities })
 
       -- bash
-      require 'lspconfig'.bashls.setup { capabilities = capabilities }
+      lspconfig.bashls.setup({ capabilities = capabilities })
 
       -- go lsp
-      require 'lspconfig'.gopls.setup { capabilities = capabilities }
+      lspconfig.gopls.setup({ capabilities = capabilities })
 
       -- rust
-      require 'lspconfig'.rust_analyzer.setup({
+      lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
         settings = {
           ['rust-analyzer'] = {
@@ -122,5 +123,34 @@ return {
         end,
       })
     end,
-  }
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+    config = function()
+      local lint = require("lint")
+      lint.linters_by_ft = {
+        python = { "pylint" },
+      }
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        python = { "black" },
+      },
+    },
+  },
 }
