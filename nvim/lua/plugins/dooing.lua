@@ -2,7 +2,7 @@ return {
   {
     "atiladefreitas/dooing",
     opts = {
-      save_path = vim.fn.expand("~/notes/dooing_todos.json"),
+      save_path = vim.fn.expand("~/Documents/notes/dooing_todos.json"),
       window = {
         width = 60,
         height = 20,
