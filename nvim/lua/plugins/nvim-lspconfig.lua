@@ -21,7 +21,7 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "pylsp", "marksman", "bashls", "lua_ls", "rust_analyzer", "harper_ls" },
+        -- ensure_installed = { "pylsp", "marksman", "bashls", "lua_ls", "rust_analyzer", "harper_ls" },
         automatic_installation = true,
       })
     end,
@@ -62,12 +62,31 @@ return {
 
       -- nixd
       lspconfig.nixd.setup({ capabilites = capabilities })
-
       -- markdown
       lspconfig.marksman.setup({
         capabilities = capabilities,
-      })
+        root_dir = function(fname)
+          local util = require('lspconfig.util')
 
+          -- Try to find a `.git`/`.marksman.toml` folder
+          local root = util.root_pattern('.git', '.marksman.toml')(fname)
+          if root then
+            --print("📁 Marksman: using project root:", root)
+            return root
+          end
+
+          -- If that fails, but file is inside `~/Documents/notes`, treat it as project root
+          local cwd = vim.fn.getcwd()
+          if vim.endswith(cwd, 'notes') then
+            --print("📁 Marksman: using ~/Documents/notes as root:", cwd)
+            return cwd
+          end
+
+          -- Otherwise, let Marksman run in single-file mode
+          print("🚧 Marksman: no root_dir found, entering single-file mode (returned nil)")
+          return nil
+        end
+      })
       -- bash
       lspconfig.bashls.setup({ capabilities = capabilities })
 
@@ -142,5 +161,4 @@ return {
       require('mason-conform').setup({ ignore_install = {} })
     end
   },
-}      
-
+}
