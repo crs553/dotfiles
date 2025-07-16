@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 local config = {}
 
 config.color_scheme = "Catppuccin Mocha" -- Options: Latte, Frappe, Macchiato, or Mocha
-config.font = wezterm.font 'JetBrains Mono'
+config.font = wezterm.font("MesloLGS NF")
 config.font_size = 12
 
 -- Miscellaneous settings
