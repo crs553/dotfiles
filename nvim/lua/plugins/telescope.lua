@@ -33,6 +33,13 @@ return {
         }
       end)
 
+      -- Added keymap for NixOS config
+      vim.keymap.set("n", "<leader>nx", function()
+        require('telescope.builtin').find_files {
+          cwd = "~/nixos-config"
+        }
+      end)
+
       require "config.telescope.multigrep".setup()
     end
   }
