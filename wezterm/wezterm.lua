@@ -8,7 +8,7 @@ config.font = wezterm.font_with_fallback {
   "Symbols Nerd Font Mono", -- for Starship icons
   "Noto Color Emoji",       -- for emojis
 }
-config.font_size = 21
+config.font_size = 12
 
 config.window_close_confirmation = "NeverPrompt"
 config.automatically_reload_config = false
