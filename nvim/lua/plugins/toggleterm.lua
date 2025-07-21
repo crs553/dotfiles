@@ -1,7 +1,6 @@
 return {
   {
     'akinsho/toggleterm.nvim',
-    tag = "v2.13.1",
     opts = {
       --[[ things you want to change go here]]
       size = 90,
