@@ -2,7 +2,6 @@
 return {
   {
     'williamboman/mason.nvim',
-    tag = "v2.0.0-rc.2",
     config = function()
       require("mason").setup({
         ui = {
@@ -17,7 +16,6 @@ return {
   },
   {
     'williamboman/mason-lspconfig.nvim',
-    tag = "v2.0.0-rc.1",
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
@@ -28,7 +26,6 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    tag = "v2.1.0",
     dependencies = {
       {
         "folke/lazydev.nvim",

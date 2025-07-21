@@ -1,6 +1,5 @@
 return {
   "catppuccin/nvim",
-  tag = "v1.10.0",
   name = "catppuccin",
   lazy = false,    -- load during startup
   priority = 1000, -- ensure it's loaded before other UI plugins
