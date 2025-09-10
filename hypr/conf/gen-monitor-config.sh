@@ -8,10 +8,10 @@ HOST=$(hostname)
 # -------------------------------------------------
 if [ "$HOST" = "pocket" ]; then
     # Rotate the monitor output (eDP‑1) 90° clockwise
-    hyprctl keyword monitor "eDP-1,preferred,auto,1,transform,1"
+    hyprctl keyword monitor "DSI-1,preferred,auto,1.5,transform,3"
 
     # Rotate the touchscreen input to match the display
-    hyprctl keyword input:goodix-capacitive-touchscreen-1 transform 90
+    #hyprctl keyword device:0x179ed990:transform 1
 
 # -------------------------------------------------
 # Framework Laptop – normal orientation, scaled UI
