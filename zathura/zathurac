@@ -1,0 +1,57 @@
+# ┌──────────────────────────────────────┐
+# │                                      │
+# │     ░▀▀█░█▀█░▀█▀░█░█░█░█░█▀▄░█▀█     │
+# │     ░▄▀░░█▀█░░█░░█▀█░█░█░█▀▄░█▀█     │
+# │     ░▀▀▀░▀░▀░░▀░░▀░▀░▀▀▀░▀░▀░▀░▀     │
+# │                                      │
+# └──────────────────────────────────────┘
+
+set notification-error-bg       "#ffb4ab"
+set notification-error-fg       "#690005"
+set notification-warning-bg     "#ffb86c"
+set notification-warning-fg     "#44475a"
+set notification-bg             "#181c20"
+set notification-fg             "#c2c7ce"
+
+set completion-bg               "#181c20"
+set completion-fg               "#c2c7ce"
+set completion-group-bg         "#98ccf9"
+set completion-group-fg         "#003351"
+set completion-highlight-bg     "#b8c8da"
+set completion-highlight-fg     "#23323f"
+
+set index-bg                    "#101418"
+set index-fg                    "#c2c7ce"
+set index-active-bg             "#98ccf9"
+set index-active-fg             "#003351"
+
+set inputbar-bg                 "#181c20"
+set inputbar-fg                 "#c2c7ce"
+set statusbar-bg                "#181c20"
+set statusbar-fg                "#c2c7ce"
+
+set highlight-fg                rgba(224,226,232,1.0)
+set highlight-active-color      rgba(255,191,231,0.5)
+set highlight-color             rgba(209,180,171,0.5)
+
+set default-bg                  "#101418"
+set default-fg                  "#c2c7ce"
+
+set render-loading              true
+set render-loading-fg           "#101418"
+set render-loading-bg           "#c2c7ce"
+
+# Recolor mode settings
+set recolor                     true
+set recolor-lightcolor          "#101418"
+set recolor-darkcolor           "#c2c7ce"
+
+# Custom settings
+set window-title-home-tilde true
+set statusbar-basename true
+set selection-clipboard clipboard
+set adjust-open "width"
+set guioptions ""
+set first-page-column 1:2
+map j feedkeys "<C-Down>"
+map k feedkeys "<C-Up>"
