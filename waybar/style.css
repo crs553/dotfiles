@@ -1,57 +1,73 @@
+
 @import "catpuccin-mocha.css";
 
+/* === Base & Defaults === */
 * {
     border: none;
-    border-radius: 0px;
-    font-family: "JetBrains Mono";
-    font-weight: bold;
+    border-radius: 0;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 600;
     font-size: 12px;
     min-height: 0;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
+    background: transparent;
     color: @text;
 }
 
+/* === Tooltips === */
 tooltip {
     background: @base;
+    color: @text;
     border-radius: 10px;
-    border-width: 1.5px;
-    border-style: solid;
-    border-color: @crust;;
-    transition: 0.3s;
+    border: 1px solid @mantle;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    padding: 6px 10px;
+}
+
+/* === Workspaces === */
+#workspaces {
+    background: @base;
+    border-radius: 20px;
+    margin: 5px 5px 0 5px;
+    padding: 3px 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
 }
 
 #workspaces button {
-    padding: 5px;
-    color: @overlay0;    
-    margin-right: 5px;
+    padding: 4px 10px;
+    color: @overlay0;
+    margin-right: 4px;
+    border-radius: 15px;
+    background: transparent;
+    transition: 0.25s ease;
 }
 
 #workspaces button.active {
-    color: rgba(255, 85, 85, 0.85);
+    color: @text;
+    background: @surface1;
+    box-shadow: inset 0 0 0 1px @overlay1;
 }
 
 #workspaces button.focused {
-    color: @text;
+    color: @crust;
     background: @maroon;
-    border-radius: 20px;
+    box-shadow: 0 0 6px rgba(255, 85, 85, 0.4);
 }
 
 #workspaces button.urgent {
+    background: @red;
     color: @crust;
-    background: @green;
-    border-radius: 20px;
 }
 
 #workspaces button:hover {
-    background: @crust;
+    background: @surface0;
     color: @text;
-    border-radius: 20px;
 }
 
+/* === General Module Style === */
 #idle_inhibitor,
 #custom-power_profile,
 #custom-weather,
@@ -64,102 +80,94 @@ tooltip {
 #memory,
 #bluetooth,
 #temperature,
-#workspaces,
 #tray,
 #backlight {
-    background: @base;
-    opacity: 0.8;
-    padding: 0px 10px;
-    margin: 0;
-    margin-top: 5px;
+    background: rgba(30, 30, 46, 0.75);
     border: 1px solid @mantle;
+    border-radius: 20px;
+    padding: 4px 10px;
+    margin: 5px 4px 0 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: 0.3s ease;
 }
 
-#temperature {
-    border-radius: 20px 0px 0px 20px;
+/* === Hover Feedback === */
+#idle_inhibitor:hover,
+#custom-power_profile:hover,
+#custom-weather:hover,
+#window:hover,
+#clock:hover,
+#battery:hover,
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#bluetooth:hover,
+#temperature:hover,
+#tray:hover,
+#backlight:hover {
+    background: rgba(49, 50, 68, 0.9);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    color: @peach;
 }
 
+/* === Module Specifics === */
 #temperature.critical {
     color: @maroon;
 }
 
-#backlight {
-    border-radius: 20px 0px 0px 20px;
-    padding-left: 7px;
-}
-
-#tray {
-    border-radius: 20px;
-    margin-right: 5px;
-    padding: 0px 4px;
-}
-
-#workspaces {
-    background: @base;
-    border-radius: 20px;
-    margin-left: 5px;
-    padding-right: 0px;
-    padding-left: 5px;
-}
-
-#custom-power_profile {
-    color: @green;
-    border-left: 0px;
-    border-right: 0px;
-}
-
-#window {
-    border-radius: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
 #clock {
     color: @peach;
-    border-radius: 20px;
-    margin-left: 5px;
-    border-right: 0px;
-    transition: 0.3s;
-    padding-left: 7px;
 }
 
 #network {
     color: @yellow;
-    border-radius: 20px 0px 0px 20px;
-    border-left: 0px;
-    border-right: 0px;
 }
 
 #bluetooth {
     color: @blue;
-    border-radius: 20px;
-    margin-right: 10px
-} 
+}
 
 #pulseaudio {
-    color: @blue;
-    border-left: 0px;
-    border-right: 0px;
+    color: @sky;
 }
 
 #pulseaudio.microphone {
-    color: #cba6f7;
-    border-left: 0px;
-    border-right: 0px;
-    border-radius: 0px 20px 20px 0px;
-    margin-right: 5px;
-    padding-right: 8px;
+    color: @mauve;
 }
 
 #battery {
     color: @green;
-    border-radius: 0 20px 20px 0;
-    margin-right: 5px;
-    border-left: 0px;
+}
+
+#custom-power_profile {
+    color: @green;
 }
 
 #custom-weather {
-    border-radius: 20px;
-    border-right: 0px;
-    margin-left: 0px;
+    color: @sapphire;
 }
+
+#cpu {
+    color: @mauve;
+}
+
+#memory {
+    color: @pink;
+}
+
+/* === Tray === */
+#tray {
+    border-radius: 20px;
+    padding: 0 6px;
+}
+
+/* === Window Title === */
+#window {
+    border-radius: 20px;
+    color: @text;
+    font-weight: 500;
+    padding: 4px 10px;
+    opacity: 0.9;
+}
+
