@@ -1,0 +1,184 @@
+{
+"mice": [
+    {
+        "address": "0x2e8b55e0",
+        "name": "sino-wealth-gaming-keyboard-mouse",
+        "defaultSpeed": 0.00000
+    },    {
+        "address": "0x2da48d00",
+        "name": "sino-wealth-gaming-keyboard-consumer-control-1",
+        "defaultSpeed": 0.00000
+    },    {
+        "address": "0x2d9e2160",
+        "name": "logitech-mx-master-3s",
+        "defaultSpeed": 0.00000
+    },    {
+        "address": "0x2f1402c0",
+        "name": "bluetooth-5.1-keyboard-1",
+        "defaultSpeed": 0.00000
+    }
+],
+"keyboards": [
+    {
+        "address": "0x2d9bb9a0",
+        "name": "power-button",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2eb8a6c0",
+        "name": "video-bus",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2e7ed8b0",
+        "name": "power-button-1",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2edd5f50",
+        "name": "sino-wealth-gaming-keyboard",
+        "rules": "",
+        "model": "",
+        "layout": "us",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (US)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2ee30080",
+        "name": "sino-wealth-gaming-keyboard-system-control",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2ee7ce10",
+        "name": "sino-wealth-gaming-keyboard-consumer-control",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2eeb7e40",
+        "name": "sino-wealth-gaming-keyboard-wireless-radio-control",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2eed01b0",
+        "name": "goodix-capacitive-touchscreen",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2ef08cd0",
+        "name": "intel-hid-events",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2ef6af30",
+        "name": "gpio-keys",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2efa54e0",
+        "name": "gpio-keys-1",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": false
+    },    {
+        "address": "0x2f0f4780",
+        "name": "bluetooth-5.1-keyboard",
+        "rules": "",
+        "model": "",
+        "layout": "gb",
+        "variant": "",
+        "options": "grp:alt_shift:toggle",
+        "active_keymap": "English (UK)",
+        "capsLock": false,
+        "numLock": false,
+        "main": true
+    }
+],
+"tablets": [
+
+],
+"touch": [
+    {
+        "address": "0x2ed29f90",
+        "name": "goodix-capacitive-touchscreen-1"
+    }
+],
+"switches": [
+    {
+        "address": "0x2ed8cd70",
+        "name": "Lid Switch"
+    }
+]
+}
+
