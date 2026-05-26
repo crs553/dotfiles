@@ -36,8 +36,14 @@
 }
 
 window#waybar {
-    background: rgba(30, 30, 46, 0.7);
+    background: transparent;
     color: @text;
+}
+
+window#waybar > box {
+    background: @base;
+    border-radius: 10px;
+    margin: 5px;
 }
 
 tooltip {
@@ -96,17 +102,8 @@ tooltip {
 #disk,
 #mpris,
 #scratchpad {
-    background: @base;
-    opacity: 0.9;
     padding: 0px 10px;
-    margin: 0;
-    margin-top: 5px;
-    border: 1px solid @surface0;
     border-radius: 10px;
-}
-
-#temperature {
-    border-radius: 10px 0px 0px 10px;
 }
 
 #temperature.critical {
@@ -114,7 +111,6 @@ tooltip {
 }
 
 #backlight {
-    border-radius: 10px 0px 0px 10px;
     padding-left: 7px;
 }
 
@@ -125,7 +121,6 @@ tooltip {
 }
 
 #workspaces {
-    background: @base;
     border-radius: 10px;
     margin-left: 5px;
     padding-right: 0px;
@@ -134,8 +129,6 @@ tooltip {
 
 #custom-power_profile {
     color: @mauve;
-    border-left: 0px;
-    border-right: 0px;
 }
 
 #window {
@@ -148,16 +141,12 @@ tooltip {
     color: @peach;
     border-radius: 10px;
     margin-left: 5px;
-    border-right: 0px;
     transition: 0.3s;
     padding-left: 7px;
 }
 
 #network {
     color: @yellow;
-    border-radius: 10px 0px 0px 10px;
-    border-left: 0px;
-    border-right: 0px;
 }
 
 #bluetooth {
@@ -168,14 +157,10 @@ tooltip {
 
 #pulseaudio {
     color: @mauve;
-    border-left: 0px;
-    border-right: 0px;
 }
 
 #pulseaudio.microphone {
     color: #cba6f7;
-    border-left: 0px;
-    border-right: 0px;
     border-radius: 0px 10px 10px 0px;
     margin-right: 5px;
     padding-right: 8px;
@@ -185,13 +170,11 @@ tooltip {
     color: @green;
     border-radius: 0 10px 10px 0;
     margin-right: 5px;
-    border-left: 0px;
 }
 
 #custom-weather {
     color: @peach;
     border-radius: 10px;
-    border-right: 0px;
     margin-left: 0px;
 }
 
@@ -205,8 +188,6 @@ tooltip {
 
 #disk {
     color: @teal;
-    border-left: 0px;
-    border-right: 0px;
 }
 
 #mpris {
