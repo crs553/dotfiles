@@ -36,7 +36,7 @@
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
+    background: rgba(30, 30, 46, 0.7);
     color: @text;
 }
 
@@ -56,25 +56,25 @@ tooltip {
 }
 
 #workspaces button.active {
-    color: rgba(255, 85, 85, 0.85);
+    color: @mauve;
 }
 
 #workspaces button.focused {
     color: @text;
-    background: @maroon;
-    border-radius: 20px;
+    background: @blue;
+    border-radius: 10px;
 }
 
 #workspaces button.urgent {
     color: @crust;
     background: @green;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 #workspaces button:hover {
     background: @crust;
     color: @text;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 #idle_inhibitor,
@@ -91,17 +91,22 @@ tooltip {
 #temperature,
 #workspaces,
 #tray,
-#backlight {
+#backlight,
+#language,
+#disk,
+#mpris,
+#scratchpad {
     background: @base;
-    opacity: 0.8;
+    opacity: 0.9;
     padding: 0px 10px;
     margin: 0;
     margin-top: 5px;
-    border: 1px solid @mantle;
+    border: 1px solid @surface0;
+    border-radius: 10px;
 }
 
 #temperature {
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 10px 0px 0px 10px;
 }
 
 #temperature.critical {
@@ -109,39 +114,39 @@ tooltip {
 }
 
 #backlight {
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 10px 0px 0px 10px;
     padding-left: 7px;
 }
 
 #tray {
-    border-radius: 20px;
+    border-radius: 10px;
     margin-right: 5px;
     padding: 0px 4px;
 }
 
 #workspaces {
     background: @base;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-left: 5px;
     padding-right: 0px;
     padding-left: 5px;
 }
 
 #custom-power_profile {
-    color: @green;
+    color: @mauve;
     border-left: 0px;
     border-right: 0px;
 }
 
 #window {
-    border-radius: 20px;
+    border-radius: 10px;
     margin-left: 5px;
     margin-right: 5px;
 }
 
 #clock {
     color: @peach;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-left: 5px;
     border-right: 0px;
     transition: 0.3s;
@@ -150,19 +155,19 @@ tooltip {
 
 #network {
     color: @yellow;
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 10px 0px 0px 10px;
     border-left: 0px;
     border-right: 0px;
 }
 
 #bluetooth {
-    color: @blue;
-    border-radius: 20px;
+    color: @sapphire;
+    border-radius: 10px;
     margin-right: 10px;
 }
 
 #pulseaudio {
-    color: @blue;
+    color: @mauve;
     border-left: 0px;
     border-right: 0px;
 }
@@ -171,20 +176,52 @@ tooltip {
     color: #cba6f7;
     border-left: 0px;
     border-right: 0px;
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 0px 10px 10px 0px;
     margin-right: 5px;
     padding-right: 8px;
 }
 
 #battery {
     color: @green;
-    border-radius: 0 20px 20px 0;
+    border-radius: 0 10px 10px 0;
     margin-right: 5px;
     border-left: 0px;
 }
 
 #custom-weather {
-    border-radius: 20px;
+    color: @peach;
+    border-radius: 10px;
     border-right: 0px;
     margin-left: 0px;
 }
+
+#language {
+    color: @lavender;
+    border-radius: 10px;
+    margin-left: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#disk {
+    color: @teal;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#mpris {
+    color: @text;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#scratchpad {
+    color: @teal;
+    border-radius: 10px;
+    margin-left: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+

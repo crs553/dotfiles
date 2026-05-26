@@ -1,0 +1,56 @@
+/* Blueman-manager */
+window.background blueman-manager {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+}
+blueman-manager headerbar {
+  background: #181825;
+  color: #cdd6f4;
+}
+blueman-manager treeview {
+  background: #1e1e2e;
+  color: #cdd6f4;
+}
+blueman-manager treeview:selected {
+  background: #89b4fa;
+  color: #1e1e2e;
+}
+blueman-manager button {
+  background: #313244;
+  color: #cdd6f4;
+  border-color: #585b70;
+}
+blueman-manager button:hover {
+  background: #45475a;
+}
+
+/* Pavucontrol */
+window.background pavucontrol {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+}
+pavucontrol headerbar {
+  background: #181825;
+  color: #cdd6f4;
+}
+pavucontrol trough {
+  background: #313244;
+}
+pavucontrol trough highlight {
+  background: #89b4fa;
+}
+pavucontrol scale slider {
+  background: #89b4fa;
+}
+pavucontrol combobox box {
+  background: #313244;
+  color: #cdd6f4;
+}
+pavucontrol list row {
+  background: #1e1e2e;
+  color: #cdd6f4;
+}
+pavucontrol list row:selected {
+  background: #89b4fa;
+  color: #1e1e2e;
+}

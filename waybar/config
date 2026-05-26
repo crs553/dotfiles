@@ -5,38 +5,47 @@
 
   "modules-left": [
     "hyprland/workspaces",
-    "hyprland/submap"
+    "hyprland/submap",
+    "hyprland/language",
+    "hyprland/scratchpad"
   ],
 
   "modules-center": [
-    "hyprland/window"
+    "hyprland/window",
+    "mpris"
   ],
 
   "modules-right": [
     "idle_inhibitor",
-    "pulseaudio",
+    "custom/power_profile",
+    "bluetooth",
     "network",
+    "pulseaudio",
     "cpu",
     "memory",
+    "disk",
     "temperature",
     "backlight",
     "battery",
     "clock",
-    "tray"
+    "tray",
+    "custom/weather"
   ],
 
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "warp-on-scroll": false,
-    "format": "{name}: {icon}",
+    "format": "{name} {icon}",
     "format-icons": {
       "1": "",
       "2": "",
       "3": "",
       "4": "",
-      "5": "",
+      "5": "",
       "6": "",
+      "7": "",
+      "8": "",
       "default": ""
     }
   },
@@ -56,16 +65,19 @@
 
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format-alt": "{:%Y-%m-%d}",
+    "on-click": "gnome-calendar"
   },
 
   "cpu": {
     "format": "{usage}% ",
-    "tooltip": false
+    "tooltip": false,
+    "on-click": "kitty --class btop -e btop"
   },
 
   "memory": {
-    "format": "{}% "
+    "format": "{}% ",
+    "on-click": "kitty --class btop -e btop"
   },
 
   "temperature": {
@@ -76,7 +88,7 @@
 
   "backlight": {
     "format": "{percent}% {icon}",
-    "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
+    "format-icons": ["", "", "", "", ""]
   },
 
   "battery": {
@@ -88,7 +100,8 @@
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
     "format-alt": "{time} {icon}",
-    "format-icons": [" ", " ", " ", " ", " "]
+    "format-icons": [" ", " ", " ", " ", " "],
+    "on-click": "powerprofilesctl"
   },
 
   "network": {
@@ -97,7 +110,8 @@
     "tooltip-format": "{ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click": "nm-connection-editor"
   },
 
   "pulseaudio": {
@@ -117,5 +131,80 @@
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
+  },
+
+  "hyprland/window": {
+    "rewrite": {
+      "(.*) - Brave": " Brave",
+      "(.*) — Mozilla Firefox": " Firefox",
+      "(.*) — Thunar": " Thunar"
+    }
+  },
+
+  "hyprland/language": {
+    "format": "{}",
+    "format-en": "US",
+    "on-click": "hyprctl switchxkblayout current next"
+  },
+
+  "hyprland/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": [""],
+    "tooltip": true
+  },
+
+  "mpris": {
+    "format": "{player_icon} {title}",
+    "format-paused": "{status_icon} {title}",
+    "player-icons": {
+      "default": "",
+      "spotify": "",
+      "firefox": "",
+      "brave": "",
+      "mpv": ""
+    },
+    "status-icons": {
+      "playing": "",
+      "paused": ""
+    },
+    "max-length": 50,
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": " ",
+    "format-connected": " {device_alias}",
+    "tooltip-format": "{device_alias}",
+    "on-click": "blueman-manager"
+  },
+
+  "custom/power_profile": {
+    "format": "{} {icon}",
+    "format-icons": {
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    },
+    "exec": "powerprofilesctl get",
+    "on-click": "powerprofilesctl cycle",
+    "interval": 10
+  },
+
+  "custom/weather": {
+    "format": "{} ",
+    "exec": "curl -s 'wttr.in?format=%c+%t' 2>/dev/null || echo 'N/A'",
+    "interval": 600,
+    "on-click": "xdg-open 'https://wttr.in'"
+  },
+
+  "disk": {
+    "format": "{percentage_used}% ",
+    "path": "/",
+    "interval": 60,
+    "on-click": "kitty -e df -h"
   }
 }
