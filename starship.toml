@@ -1,6 +1,8 @@
 add_newline = false
 command_timeout = 1000
-format = "[](surface1)$os[](bg:surface2 fg:surface1)$username$sudo[](bg:overlay0 fg:surface2)$hostname[](bg:mauve fg:overlay0)$directory[](fg:mauve bg:peach)$c$dart$dotnet$elixir$elm$erlang$golang$haskell$haxe$java$julia$kotlin$lua$nim$nodejs$rlang$ruby$rust$perl$php$python$scala$swift$zig$package$git_branch[](fg:peach bg:yellow)$git_status[](fg:yellow bg:teal)$container$direnv$nix_shell$cmd_duration$jobs$shlvl$status$character"
+format = """
+[](surface1)$os[](bg:surface2 fg:surface1)$username$sudo[](bg:overlay0 fg:surface2)$hostname[](bg:mauve fg:overlay0)$directory[](fg:mauve bg:blue)$git_branch[](fg:blue bg:peach)$c$dart$dotnet$elixir$elm$erlang$golang$haskell$haxe$java$julia$kotlin$lua$nim$nodejs$perl$php$python$rlang$ruby$rust$scala$swift$zig$package[](fg:peach bg:yellow)$git_status[](fg:yellow bg:teal)$direnv$nix_shell$container$cmd_duration$jobs$shlvl$status[](fg:blue)
+$character"""
 palette = "catppuccin_mocha"
 
 [c]
@@ -10,14 +12,13 @@ symbol = ""
 
 [character]
 disabled = false
-error_symbol = "(fg:red bg:pink)[](fg:pink) "
+error_symbol = "[](fg:red bg:pink) "
 format = "$symbol"
-success_symbol = "[](fg:blue) "
+success_symbol = "❯ "
 
 [cmd_duration]
 format = "[  $duration]($style)"
 min_time = 2500
-min_time_to_notify = 60000
 show_notifications = false
 style = "fg:base bg:teal"
 
@@ -96,7 +97,7 @@ symbol = ""
 
 [git_branch]
 format = "[ $symbol $branch]($style)"
-style = "fg:base bg:peach"
+style = "fg:base bg:blue"
 symbol = ""
 
 [git_status]
@@ -292,7 +293,7 @@ format = "[ $symbol]($style)"
 repeat = false
 style = "fg:surface1 bg:teal"
 symbol = "󱆃"
-threshold = 3
+threshold = 2
 
 [status]
 disabled = false
