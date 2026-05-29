@@ -7,7 +7,7 @@ confirm() {
 }
 
 chosen=$(echo -e "  Lock\n⏻  Power Off\n  Reboot\n󰤄  Suspend\n  Logout" |
-  wofi --dmenu --insensitive --width 250 --height 300)
+  wofi --dmenu --insensitive --width 250 --height 500 --lines 5 --columns 1)
 
 case "$chosen" in
 "  Lock") hyprlock ;;
