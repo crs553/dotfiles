@@ -35,14 +35,14 @@ hl.bind(M .. " + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
 
 -- Workspace switch
 for i = 1, 10 do
-  local key = i == 10 and "0" or tostring(i)
-  hl.bind(M .. " + " .. key, hl.dsp.focus({ workspace = i }))
+	local key = i == 10 and "0" or tostring(i)
+	hl.bind(M .. " + " .. key, hl.dsp.focus({ workspace = i }))
 end
 
 -- Move to workspace
 for i = 1, 10 do
-  local key = i == 10 and "0" or tostring(i)
-  hl.bind(M .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+	local key = i == 10 and "0" or tostring(i)
+	hl.bind(M .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 -- Special workspace (scratchpad)
@@ -63,17 +63,25 @@ hl.bind(M .. " + F", hl.dsp.window.fullscreen())
 -- Resize submap
 hl.bind(M .. " + R", hl.dsp.submap("resize"))
 hl.define_submap("resize", function()
-  hl.bind("right", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
-  hl.bind("left", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
-  hl.bind("up", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
-  hl.bind("down", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
-  hl.bind("escape", hl.dsp.submap("reset"))
+	hl.bind("right", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
+	hl.bind("left", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+	hl.bind("up", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+	hl.bind("down", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+	hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
 -- Volume
 hl.bind("xf86audiomute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
-hl.bind("xf86audioraisevolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true })
-hl.bind("xf86audiolowervolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true })
+hl.bind(
+	"xf86audioraisevolume",
+	hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"),
+	{ repeating = true }
+)
+hl.bind(
+	"xf86audiolowervolume",
+	hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"),
+	{ repeating = true }
+)
 
 -- Media controls
 hl.bind("xf86audioplay", hl.dsp.exec_cmd("playerctl play"))
@@ -83,9 +91,15 @@ hl.bind("xf86audioprev", hl.dsp.exec_cmd("playerctl previous"))
 hl.bind("xf86search", hl.dsp.exec_cmd(menu))
 
 -- Screenshots
-hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/$(date +%Hh_%Mm_%Ss_%d_%B_%Y).png && notify-send \"Screenshot saved\""))
-hl.bind("SHIFT + Print", hl.dsp.exec_cmd("slurp | grim -g - - | wl-copy && notify-send \"Screenshot copied\""))
-hl.bind(M .. " + SHIFT + R", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/$(date +%Hh_%Mm_%Ss_%d_%B_%Y).png && notify-send \"Screenshot saved\""))
+hl.bind(
+	"Print",
+	hl.dsp.exec_cmd('grim -g "$(slurp)" ~/Pictures/$(date +%Hh_%Mm_%Ss_%d_%B_%Y).png && notify-send "Screenshot saved"')
+)
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd('slurp | grim -g - - | wl-copy && notify-send "Screenshot copied"'))
+hl.bind(
+	M .. " + SHIFT + R",
+	hl.dsp.exec_cmd('grim -g "$(slurp)" ~/Pictures/$(date +%Hh_%Mm_%Ss_%d_%B_%Y).png && notify-send "Screenshot saved"')
+)
 
 -- Brightness
 hl.bind("xf86monbrightnessdown", hl.dsp.exec_cmd("brightnessctl -d intel_backlight s 10%-"))
@@ -103,5 +117,5 @@ hl.bind(M .. " + SHIFT + O", hl.dsp.exec_cmd("systemctl --user restart waybar.se
 hl.bind(M .. " + SHIFT + M", hl.dsp.exec_cmd("pkill hyprpaper && hyprctl dispatch exec hyprpaper"))
 
 -- Lid switch
-hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, disable\""))
-hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, preferred, auto, 1.333333\""))
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, disable"'))
+hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, preferred, auto, 1.333333"'))
