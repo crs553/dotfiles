@@ -28,10 +28,10 @@ hl.bind(M .. " + K", hl.dsp.focus({ direction = "u" }))
 hl.bind(M .. " + J", hl.dsp.focus({ direction = "d" }))
 
 -- Window movement
-hl.bind("SUPER + SHIFT + H", hl.dsp.window.move({ direction = "l" }))
-hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ direction = "r" }))
-hl.bind("SUPER + SHIFT + K", hl.dsp.window.move({ direction = "u" }))
-hl.bind("SUPER + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
+hl.bind(M .. " + SHIFT + H", hl.dsp.window.move({ direction = "l" }))
+hl.bind(M .. " + SHIFT + L", hl.dsp.window.move({ direction = "r" }))
+hl.bind(M .. " + SHIFT + K", hl.dsp.window.move({ direction = "u" }))
+hl.bind(M .. " + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
 
 -- Workspace switch
 for i = 1, 10 do
@@ -62,11 +62,13 @@ hl.bind(M .. " + F", hl.dsp.window.fullscreen())
 
 -- Resize submap
 hl.bind(M .. " + R", hl.dsp.submap("resize"))
-hl.bind("right", hl.dsp.window.resize({ x = 10, y = 0 }), { repeating = true })
-hl.bind("left", hl.dsp.window.resize({ x = -10, y = 0 }), { repeating = true })
-hl.bind("up", hl.dsp.window.resize({ x = 0, y = -10 }), { repeating = true })
-hl.bind("down", hl.dsp.window.resize({ x = 0, y = 10 }), { repeating = true })
-hl.bind("escape", hl.dsp.submap("reset"))
+hl.define_submap("resize", function()
+  hl.bind("right", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
+  hl.bind("left", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+  hl.bind("up", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+  hl.bind("down", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+  hl.bind("escape", hl.dsp.submap("reset"))
+end)
 
 -- Volume
 hl.bind("xf86audiomute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
@@ -99,3 +101,7 @@ hl.bind(M .. " + SHIFT + Z", hl.dsp.exec_cmd("signal-desktop"))
 -- Reload
 hl.bind(M .. " + SHIFT + O", hl.dsp.exec_cmd("systemctl --user restart waybar.service"))
 hl.bind(M .. " + SHIFT + M", hl.dsp.exec_cmd("pkill hyprpaper && hyprctl dispatch exec hyprpaper"))
+
+-- Lid switch
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, disable\""))
+hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, preferred, auto, 1.333333\""))

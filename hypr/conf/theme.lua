@@ -1,56 +1,40 @@
-local theme = {}
+-- Catppuccin Mocha palette
+-- Each colour's raw hex is defined once; `theme.<name>` yields "rgb(<hex>)"
+-- and `theme.<name>Alpha` yields the raw hex for APIs that need it.
 
-theme.rosewater = "rgb(f5e0dc)"
-theme.rosewaterAlpha = "f5e0dc"
-theme.flamingo = "rgb(f2cdcd)"
-theme.flamingoAlpha = "f2cdcd"
-theme.pink = "rgb(f5c2e7)"
-theme.pinkAlpha = "f5c2e7"
-theme.mauve = "rgb(cba6f7)"
-theme.mauveAlpha = "cba6f7"
-theme.red = "rgb(f38ba8)"
-theme.redAlpha = "f38ba8"
-theme.maroon = "rgb(eba0ac)"
-theme.maroonAlpha = "eba0ac"
-theme.peach = "rgb(fab387)"
-theme.peachAlpha = "fab387"
-theme.yellow = "rgb(f9e2af)"
-theme.yellowAlpha = "f9e2af"
-theme.green = "rgb(a6e3a1)"
-theme.greenAlpha = "a6e3a1"
-theme.teal = "rgb(94e2d5)"
-theme.tealAlpha = "94e2d5"
-theme.sky = "rgb(89dceb)"
-theme.skyAlpha = "89dceb"
-theme.sapphire = "rgb(74c7ec)"
-theme.sapphireAlpha = "74c7ec"
-theme.blue = "rgb(89b4fa)"
-theme.blueAlpha = "89b4fa"
-theme.lavender = "rgb(b4befe)"
-theme.lavenderAlpha = "b4befe"
-theme.text = "rgb(cdd6f4)"
-theme.textAlpha = "cdd6f4"
-theme.subtext1 = "rgb(bac2de)"
-theme.subtext1Alpha = "bac2de"
-theme.subtext0 = "rgb(a6adc8)"
-theme.subtext0Alpha = "a6adc8"
-theme.overlay2 = "rgb(9399b2)"
-theme.overlay2Alpha = "9399b2"
-theme.overlay1 = "rgb(7f849c)"
-theme.overlay1Alpha = "7f849c"
-theme.overlay0 = "rgb(6c7086)"
-theme.overlay0Alpha = "6c7086"
-theme.surface2 = "rgb(585b70)"
-theme.surface2Alpha = "585b70"
-theme.surface1 = "rgb(45475a)"
-theme.surface1Alpha = "45475a"
-theme.surface0 = "rgb(313244)"
-theme.surface0Alpha = "313244"
-theme.base = "rgb(1e1e2e)"
-theme.baseAlpha = "1e1e2e"
-theme.mantle = "rgb(181825)"
-theme.mantleAlpha = "181825"
-theme.crust = "rgb(11111b)"
-theme.crustAlpha = "11111b"
+local colors = {
+  rosewater = "f5e0dc",
+  flamingo  = "f2cdcd",
+  pink      = "f5c2e7",
+  mauve     = "cba6f7",
+  red       = "f38ba8",
+  maroon    = "eba0ac",
+  peach     = "fab387",
+  yellow    = "f9e2af",
+  green     = "a6e3a1",
+  teal      = "94e2d5",
+  sky       = "89dceb",
+  sapphire  = "74c7ec",
+  blue      = "89b4fa",
+  lavender  = "b4befe",
+  text      = "cdd6f4",
+  subtext1  = "bac2de",
+  subtext0  = "a6adc8",
+  overlay2  = "9399b2",
+  overlay1  = "7f849c",
+  overlay0  = "6c7086",
+  surface2  = "585b70",
+  surface1  = "45475a",
+  surface0  = "313244",
+  base      = "1e1e2e",
+  mantle    = "181825",
+  crust     = "11111b",
+}
+
+local theme = {}
+for name, hex in pairs(colors) do
+  theme[name] = "rgb(" .. hex .. ")"
+  theme[name .. "Alpha"] = hex
+end
 
 return theme
