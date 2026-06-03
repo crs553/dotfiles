@@ -14,7 +14,7 @@ hl.bind(M .. " + T", hl.dsp.window.float({ action = "toggle" }))
 
 -- App launchers
 hl.bind(M .. " + D", hl.dsp.exec_cmd("pkill wofi || " .. menu))
-hl.bind(M .. " + SHIFT + P", hl.dsp.exec_cmd("pkill wofi || ~/.dotfiles/scripts/toggle_powermenu.sh"))
+hl.bind(M .. " + SHIFT + P", hl.dsp.exec_cmd("pkill wlogout || wlogout")) --hl.dsp.exec_cmd("pkill wofi || ~/.dotfiles/scripts/toggle_powermenu.sh"))
 hl.bind(M .. " + N", hl.dsp.exec_cmd("pkill wofi || ~/.dotfiles/scripts/toggle_notes_menu.sh"))
 
 -- Layout
