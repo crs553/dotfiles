@@ -1,0 +1,8 @@
+hl.on("hyprland.start", function()
+  hl.exec_cmd("systemctl --user import-environment GTK_THEME MOZ_ENABLE_WAYLAND HYPRCURSOR_THEME HYPRCURSOR_SIZE")
+  hl.exec_cmd("systemctl --user start waybar.service")
+  hl.exec_cmd("nm-applet")
+  hl.exec_cmd("systemctl --user start dunst.service")
+  hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("~/.config/hypr/conf/gen-monitor-config.sh")
+end)
