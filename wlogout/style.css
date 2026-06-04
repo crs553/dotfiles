@@ -1,0 +1,54 @@
+* {
+  background-image: none;
+  box-shadow: none;
+}
+
+window {
+  background-color: rgba(30, 30, 46, 0.90);
+}
+
+button {
+  border-radius: 10px;
+  border-color: #cba6f7;
+  text-decoration-color: #cdd6f4;
+  color: #cdd6f4;
+  background-color: #181825;
+  border-style: solid;
+  border-width: 2px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 35%;
+  min-width: 80px;
+  min-height: 80px;
+  margin: 8px;
+}
+
+button:focus, button:active, button:hover {
+  background-color: #45475a;
+  outline-style: none;
+  border-color: #cba6f7;
+}
+
+#lock {
+  background-image: url("/home/charlie/.config/wlogout/icons/lock.png");
+}
+
+#logout {
+  background-image: url("/home/charlie/.config/wlogout/icons/logout.png");
+}
+
+#suspend {
+  background-image: url("/home/charlie/.config/wlogout/icons/suspend.png");
+}
+
+#hibernate {
+  background-image: url("/home/charlie/.config/wlogout/icons/hibernate.png");
+}
+
+#shutdown {
+  background-image: url("/home/charlie/.config/wlogout/icons/shutdown.png");
+}
+
+#reboot {
+  background-image: url("/home/charlie/.config/wlogout/icons/reboot.png");
+}
