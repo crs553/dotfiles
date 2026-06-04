@@ -1,20 +1,20 @@
 -- Helpers
 local function float_at(class, size)
-  local s = size or "35% 45%"
-  hl.window_rule({ match = { class = class }, float = true })
-  hl.window_rule({ match = { class = class }, size = s })
-  hl.window_rule({ match = { class = class }, center = true })
+	local s = size or "35% 45%"
+	hl.window_rule({ match = { class = class }, float = true })
+	hl.window_rule({ match = { class = class }, size = s })
+	hl.window_rule({ match = { class = class }, center = true })
 end
 
 local function float_title(title, size)
-  local s = size or "35% 45%"
-  hl.window_rule({ match = { title = title }, float = true })
-  hl.window_rule({ match = { title = title }, size = s })
-  hl.window_rule({ match = { title = title }, center = true })
+	local s = size or "35% 45%"
+	hl.window_rule({ match = { title = title }, float = true })
+	hl.window_rule({ match = { title = title }, size = s })
+	hl.window_rule({ match = { title = title }, center = true })
 end
 
 local function window_to(class, workspace)
-  hl.window_rule({ match = { class = class }, workspace = tostring(workspace) })
+	hl.window_rule({ match = { class = class }, workspace = tostring(workspace) })
 end
 
 -- Event suppression
@@ -45,15 +45,16 @@ hl.window_rule({ match = { class = "yazi" }, workspace = "4" })
 hl.window_rule({ match = { class = "thunar" }, workspace = "4" })
 
 -- Workspace: communication (5)
-local comms = { "signal", "Signal", "org\\.signal\\.Signal", "discord", "Slack", "telegram-desktop", "Element", "ferdi" }
+local comms =
+	{ "signal", "Signal", "org\\.signal\\.Signal", "discord", "Slack", "telegram-desktop", "Element", "ferdi" }
 for _, cls in ipairs(comms) do
-  hl.window_rule({ match = { class = cls }, workspace = "5" })
+	hl.window_rule({ match = { class = cls }, workspace = "5" })
 end
 
 -- Workspace: productivity (6)
 local productivity = { "obsidian", "@joplin/app-desktop", "ONLYOFFICE", "org\\.oe-f\\." }
 for _, cls in ipairs(productivity) do
-  hl.window_rule({ match = { class = cls }, workspace = "6" })
+	hl.window_rule({ match = { class = cls }, workspace = "6" })
 end
 
 hl.window_rule({ match = { initial_title = "Excalidraw" }, workspace = "6" })
@@ -64,6 +65,9 @@ hl.window_rule({ match = { class = "Spotify" }, workspace = "7" })
 hl.window_rule({ match = { class = "vlc" }, workspace = "7" })
 hl.window_rule({ match = { class = "mpv" }, workspace = "7" })
 hl.window_rule({ match = { title = "Navidrome" }, workspace = "7" })
+
+-- Workspace: utilities (8)
+hl.window_rule({ match = { class = "localsend_app" }, workspace = "8" })
 
 -- Floating: app dialogs (float + size + center)
 float_at("blueman-manager")
@@ -90,13 +94,13 @@ hl.window_rule({ match = { title = "Picture-in-Picture" }, float = true })
 -- Floating: generic dialog classes (float only)
 local dialog_classes = { "file_progress", "confirm", "dialog", "download", "notification", "error", "confirmreset" }
 for _, cls in ipairs(dialog_classes) do
-  hl.window_rule({ match = { class = cls }, float = true })
+	hl.window_rule({ match = { class = cls }, float = true })
 end
 
 -- Floating: title-based (float only)
 local float_titles = { "Open File", "branchdialog", "Confirm to replace files", "File Operation Progress" }
 for _, t in ipairs(float_titles) do
-  hl.window_rule({ match = { title = t }, float = true })
+	hl.window_rule({ match = { title = t }, float = true })
 end
 
 -- Layer rules
