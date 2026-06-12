@@ -106,7 +106,7 @@ hl.bind("xf86monbrightnessdown", hl.dsp.exec_cmd("brightnessctl -d intel_backlig
 hl.bind("xf86monbrightnessup", hl.dsp.exec_cmd("brightnessctl -d intel_backlight s 10%+"))
 
 -- App shortcuts
-hl.bind(M .. " + W", hl.dsp.exec_cmd("pkill wofi || ~/.dotfiles/scripts/wallpaper-select.sh"))
+hl.bind(M .. " + W", hl.dsp.exec_cmd("~/.dotfiles/scripts/toggle-wallpaper-light-dark.sh"))
 hl.bind(M .. " + B", hl.dsp.exec_cmd("brave"))
 hl.bind(M .. " + SHIFT + B", hl.dsp.exec_cmd("mullvad-browser"))
 hl.bind(M .. " + SHIFT + Escape", hl.dsp.exec_cmd("loginctl lock-session"))
