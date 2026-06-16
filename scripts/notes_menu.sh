@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NOTES_DIR="$HOME/notes"
+NOTES_DIR="$HOME/Documents/Obsidian/notes"
 TERM="kitty"
 
 menu_items=$(
