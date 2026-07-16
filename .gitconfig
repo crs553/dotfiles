@@ -1,0 +1,45 @@
+[alias]
+  a = add
+  aa = add --all
+  ap = add --patch
+
+  br = branch
+  bl = blame
+
+  cl = clone
+
+  comm = commit -m
+  ca = commit --amend
+  can = commit --amend --no-edit
+
+  co = checkout
+  cp = cherry-pick
+
+  df = diff
+  dfn = diff --name-only
+
+  ft = fetch -p
+
+  glf = "log -1 --oneline --"
+  gsf = "log -p -1 --"
+  glog = "log --date-order --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'"
+  graph = "log --oneline --graph --decorate --all"
+
+  last = "log -1 --stat"
+
+  p = push
+  pf = "push --force-with-lease"
+  pl = "pull --rebase"
+
+  rc = rebase --continue
+  ra = rebase --abort
+  ri = "rebase -i"
+
+  sh = show
+
+  st = status
+
+  stash = "stash --all"
+  stashl = "stash list"
+  stashp = "stash pop"
+  stashs = "stash show -p"
