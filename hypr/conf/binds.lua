@@ -7,7 +7,7 @@ local M = "SUPER"
 -- Basic window management
 hl.bind(M .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(M .. " + Q", hl.dsp.window.close())
-hl.bind(M .. " + SHIFT + X", hl.dsp.exit())
+hl.bind(M .. " + SHIFT + X", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(M .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(M .. " + SHIFT + E", hl.dsp.exec_cmd("kitty --class yazi -e yazi"))
 hl.bind(M .. " + T", hl.dsp.window.float({ action = "toggle" }))
