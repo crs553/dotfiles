@@ -1,0 +1,313 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate (syntax)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends zsh lua5.4
+
+      - name: Shell syntax
+        run: |
+          fail=0
+          for f in scripts/*.sh; do
+            if head -1 "$f" | grep -q bash; then
+              bash -n "$f"
+            else
+              sh -n "$f"
+            fi || { echo "::error::shell syntax error in $f"; fail=1; }
+          done
+          exit $fail
+
+      - name: Zsh syntax
+        run: zsh -n zsh/.zshrc create-cursor.sh
+
+      - name: Lua syntax
+        run: |
+          fail=0
+          for f in hypr/hyprland.lua hypr/conf/*.lua wezterm/wezterm.lua; do
+            luac5.4 -p "$f" || { echo "::error::lua syntax error in $f"; fail=1; }
+          done
+          exit $fail
+
+      - name: Config format checks
+        run: |
+          python3 - <<'EOF'
+          import json
+          import re
+          import sys
+          import configparser
+          import tomllib
+
+          errors = []
+
+          def check(name, ok, detail=""):
+              print(f"[{'PASS' if ok else 'FAIL'}] {name} {detail}")
+              if not ok:
+                  errors.append(name)
+
+          # Single-document JSON
+          for p in ["waybar/config"]:
+              try:
+                  json.load(open(p))
+                  check(p, True)
+              except Exception as e:
+                  check(p, False, f"({e})")
+
+          # wlogout layout: wlogout stores one JSON object per button (stream)
+          p = "wlogout/layout"
+          try:
+              data = open(p).read()
+              dec = json.JSONDecoder()
+              i, n = 0, 0
+              while i < len(data):
+                  while i < len(data) and data[i].isspace():
+                      i += 1
+                  if i >= len(data):
+                      break
+                  _, i = dec.raw_decode(data, i)
+                  n += 1
+              check(p, n > 0, f"({n} buttons)")
+          except Exception as e:
+              check(p, False, f"({e})")
+
+          # TOML
+          try:
+              with open("starship.toml", "rb") as f:
+                  tomllib.load(f)
+              check("starship.toml", True)
+          except Exception as e:
+              check("starship.toml", False, f"({e})")
+
+          # INI
+          for p in ["dunst/dunstrc", "gtk-3.0/settings.ini"]:
+              try:
+                  configparser.ConfigParser().read(p)
+                  check(p, True)
+              except Exception as e:
+                  check(p, False, f"({e})")
+
+          # zathura: `set|map key value` directives (not INI)
+          p = "zathura/zathurac"
+          ok = True
+          for line in open(p):
+              s = line.strip()
+              if not s or s.startswith("#"):
+                  continue
+              if not re.match(r"^(set|map)\s+\S+\s+\S+", s):
+                  ok = False
+                  print(f"   unexpected line: {line.rstrip()}")
+          check(p, ok)
+
+          # btop: `key = value` lines (not INI)
+          p = "btop/btop.conf"
+          ok = True
+          for line in open(p):
+              s = line.strip()
+              if not s or s.startswith("#"):
+                  continue
+              if not re.match(r"^[^=]+=[^=]*$", s):
+                  ok = False
+                  print(f"   unexpected line: {line.rstrip()}")
+          check(p, ok)
+
+          # hyprlang: balanced braces and no odd quote counts
+          for p in ["hypr/hypridle.conf", "hypr/hyprlock.conf", "hypr/hyprpaper.conf"]:
+              s = open(p).read()
+              bal = s.count("{") - s.count("}")
+              odd = [i for i, l in enumerate(s.splitlines(), 1) if l.count('"') % 2]
+              check(p, bal == 0 and not odd, f"(braces {bal:+d}, odd-quote lines {odd})")
+
+          sys.exit(1 if errors else 0)
+          EOF
+
+  lint:
+    name: Lint (quality)
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Shellcheck + shfmt
+        uses: luizm/action-sh-checker@v0.10.0
+        with:
+          # create-cursor.sh is zsh; shellcheck hard-errors on zsh shebangs (SC1071)
+          sh_checker_exclude: create-cursor.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Luacheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends luacheck
+          luacheck hypr wezterm
+
+  build:
+    name: Build (smoke test)
+    needs: lint
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    container: debian:trixie
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install toolchain
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            ca-certificates curl dunst waybar wofi wlogout sway \
+            lua5.4 zsh python3
+          echo "deb http://deb.debian.org/debian trixie-backports main" \
+            > /etc/apt/sources.list.d/trixie-backports.list
+          apt-get update
+          apt-get install -y -t trixie-backports hyprland
+
+      - name: Asset and command integrity
+        run: |
+          python3 - <<'EOF'
+          import os
+          import shutil
+          import sys
+
+          errors = []
+          root = os.path.abspath(os.getcwd())
+
+          def check(name, ok, detail=""):
+              print(f"[{'PASS' if ok else 'FAIL'}] {name} {detail}")
+              if not ok:
+                  errors.append(name)
+
+          def resolve(path):
+              return path.replace("/home/charlie/.dotfiles/", root + "/")
+
+          # Referenced asset files (treat install path as repo root in CI)
+          for line in open("hypr/hyprpaper.conf"):
+              if line.startswith("path ="):
+                  path = line.split("=", 1)[1].strip()
+                  check(f"hyprpaper asset {path}", os.path.exists(resolve(path)))
+
+          # Referenced commands in wlogout layout (skip OS-provided commands)
+          skip = {"loginctl", "systemctl"}
+          for line in open("wlogout/layout"):
+              if '"action"' in line:
+                  cmd = line.split('"')[-2].split()[0].lstrip('"')
+                  if cmd not in skip:
+                      check(f"command {cmd}", shutil.which(cmd) is not None)
+
+          check("hyprland", shutil.which("hyprland") is not None)
+          check("waybar", shutil.which("waybar") is not None)
+          check("wofi", shutil.which("wofi") is not None)
+          check("wlogout", shutil.which("wlogout") is not None)
+          check("dunst", shutil.which("dunst") is not None)
+          check("sway", shutil.which("sway") is not None)
+
+          sys.exit(1 if errors else 0)
+          EOF
+
+      - name: Smoke test configs on headless sway
+        run: |
+          set -eu
+          useradd -m smoke
+          mkdir -p /tmp/runtime-smoke /home/smoke/.config
+          chown -R smoke:smoke /tmp/runtime-smoke /home/smoke/.config
+          for d in dunst waybar wofi wlogout; do
+            cp -r "$d" /home/smoke/.config/
+          done
+          chown -R smoke:smoke /home/smoke/.config
+
+          cat > /tmp/smoke.sh <<'SH'
+          #!/bin/bash
+          set -u
+          export HOME=/home/smoke
+          export XDG_RUNTIME_DIR=/tmp/runtime-smoke
+          export XDG_CONFIG_HOME=/home/smoke/.config
+          export WAYLAND_DISPLAY=wayland-smoke
+          export WLR_BACKENDS=headless
+          export WLR_RENDERER_ALLOW_SOFTWARE=1
+
+          mkdir -p "$XDG_RUNTIME_DIR" && chmod 700 "$XDG_RUNTIME_DIR"
+
+          sway --unsupported-gpu -c /dev/null >/tmp/sway.log 2>&1 &
+          SWAY=$!
+          for _ in $(seq 1 60); do
+            [ -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ] && break
+            sleep 0.5
+          done
+          [ -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ] || { echo "::error::sway did not start"; cat /tmp/sway.log; exit 1; }
+
+          fail=0
+
+          timeout 8 dunst -config "$XDG_CONFIG_HOME/dunst/dunstrc" -verbosity crit 2>/tmp/dunst.err || rc=$?
+          rc=${rc:-0}
+          if [ "$rc" != 124 ]; then
+            echo "::error::dunst exited early (rc=$rc)"; cat /tmp/dunst.err; fail=1
+          elif grep -qi "unknown setting\|invalid setting" /tmp/dunst.err; then
+            echo "::error::dunst reported invalid settings"; cat /tmp/dunst.err; fail=1
+          fi
+
+          timeout 10 waybar -c "$XDG_CONFIG_HOME/waybar/config" -s "$XDG_CONFIG_HOME/waybar/style.css" -l trace 2>/tmp/waybar.err || rc=$?
+          rc=${rc:-0}
+          if [ "$rc" != 124 ]; then
+            echo "::error::waybar exited early (rc=$rc)"; cat /tmp/waybar.err; fail=1
+          elif grep -qi "unable to parse\|failed to parse\|parse error" /tmp/waybar.err; then
+            echo "::error::waybar config error"; cat /tmp/waybar.err; fail=1
+          fi
+
+          timeout 6 wofi --conf "$XDG_CONFIG_HOME/wofi/config" --style "$XDG_CONFIG_HOME/wofi/style.css" --show drun 2>/tmp/wofi.err || rc=$?
+          rc=${rc:-0}
+          if [ "$rc" != 124 ]; then
+            echo "::error::wofi exited early (rc=$rc)"; cat /tmp/wofi.err; fail=1
+          fi
+
+          timeout 6 wlogout 2>/tmp/wlogout.err || rc=$?
+          rc=${rc:-0}
+          if [ "$rc" != 124 ]; then
+            echo "::error::wlogout exited early (rc=$rc)"; cat /tmp/wlogout.err; fail=1
+          fi
+
+          kill "$SWAY" 2>/dev/null || true
+          exit $fail
+          SH
+          chmod +x /tmp/smoke.sh
+          su smoke -s /bin/bash -c /tmp/smoke.sh
+
+      - name: Hyprland headless boot (informational)
+        continue-on-error: true
+        run: |
+          set -u
+          mkdir -p /home/smoke/.config/hypr /tmp/runtime-hypr
+          cp -r hypr/. /home/smoke/.config/hypr/
+          chown -R smoke:smoke /home/smoke/.config/hypr /tmp/runtime-hypr
+
+          cat > /tmp/hyprland-boot.sh <<'SH'
+          #!/bin/bash
+          set -u
+          export HOME=/home/smoke
+          export XDG_RUNTIME_DIR=/tmp/runtime-hypr
+          export XDG_CONFIG_HOME=/home/smoke/.config
+          export WLR_BACKENDS=headless
+          export WLR_RENDERER_ALLOW_SOFTWARE=1
+          chmod 700 "$XDG_RUNTIME_DIR"
+          timeout 20 Hyprland --config "$XDG_CONFIG_HOME/hypr/hyprland.lua" >/tmp/hyprland.log 2>&1
+          SH
+          chmod +x /tmp/hyprland-boot.sh
+          su smoke -s /bin/bash -c /tmp/hyprland-boot.sh
+          echo "--- hyprland log (tail) ---"
+          tail -50 /tmp/hyprland.log
