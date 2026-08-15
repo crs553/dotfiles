@@ -154,10 +154,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Luacheck
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends luacheck
-          luacheck hypr wezterm
+        uses: lunarmodules/luacheck@v1
+        with:
+          args: hypr wezterm
 
   build:
     name: Build (smoke test)
