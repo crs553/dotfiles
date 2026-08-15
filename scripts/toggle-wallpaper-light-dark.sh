@@ -5,17 +5,17 @@ CONF="$HOME/.config/hypr/hyprpaper.conf"
 STATE="$HOME/.cache/hyprpaper-mode"
 
 if [[ -f "$STATE" && $(cat "$STATE") == "dark" ]]; then
-    TARGET="$LIGHT"
-    MODE="light"
+	TARGET="$LIGHT"
+	MODE="light"
 else
-    TARGET="$DARK"
-    MODE="dark"
+	TARGET="$DARK"
+	MODE="dark"
 fi
 
-echo "$MODE" > "$STATE"
+echo "$MODE" >"$STATE"
 
 # Update config file (block syntax)
-TARGET_ESC=$(echo "$TARGET" | sed 's|/|\\/|g')
+TARGET_ESC=${TARGET//\//\\/}
 sed -i "/^wallpaper {/,/^}/ s|^\(\\s*path = \\).*|\\1$TARGET_ESC|" "$CONF"
 
 hyprctl hyprpaper wallpaper ",$TARGET"

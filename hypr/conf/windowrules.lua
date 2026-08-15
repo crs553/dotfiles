@@ -13,10 +13,6 @@ local function float_title(title, size)
 	hl.window_rule({ match = { title = title }, center = true })
 end
 
-local function window_to(class, workspace)
-	hl.window_rule({ match = { class = class }, workspace = tostring(workspace) })
-end
-
 -- Event suppression
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
 hl.window_rule({ match = { class = "org\\.oe-f\\." }, suppress_event = "fullscreen" })
