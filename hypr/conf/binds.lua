@@ -71,17 +71,9 @@ hl.define_submap("resize", function()
 end)
 
 -- Volume
-hl.bind("xf86audiomute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
-hl.bind(
-	"xf86audioraisevolume",
-	hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"),
-	{ repeating = true }
-)
-hl.bind(
-	"xf86audiolowervolume",
-	hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"),
-	{ repeating = true }
-)
+hl.bind("xf86audiomute", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh volume toggle"))
+hl.bind("xf86audioraisevolume", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh volume 5%+"), { repeating = true })
+hl.bind("xf86audiolowervolume", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh volume 5%-"), { repeating = true })
 
 -- Media controls
 hl.bind("xf86audioplay", hl.dsp.exec_cmd("playerctl play"))
@@ -102,8 +94,8 @@ hl.bind(
 )
 
 -- Brightness
-hl.bind("xf86monbrightnessdown", hl.dsp.exec_cmd("brightnessctl -d intel_backlight s 10%-"))
-hl.bind("xf86monbrightnessup", hl.dsp.exec_cmd("brightnessctl -d intel_backlight s 10%+"))
+hl.bind("xf86monbrightnessdown", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh brightness 10%-"))
+hl.bind("xf86monbrightnessup", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh brightness 10%+"))
 
 -- App shortcuts
 hl.bind(M .. " + W", hl.dsp.exec_cmd("~/.dotfiles/scripts/toggle-wallpaper-light-dark.sh"))
