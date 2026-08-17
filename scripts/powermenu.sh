@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 confirm() {
 	prompt="$1"

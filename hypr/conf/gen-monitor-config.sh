@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 # Get the short hostname (e.g. “pocket” or “framework”)
 HOST=$(hostname)

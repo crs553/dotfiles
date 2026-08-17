@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+set -eu
 
 # Define variables
 ICONS_DIR="$HOME/.icons"
@@ -14,6 +15,11 @@ curl -Lo "$ZIP_FILE" -sS "$ZIP_URL"
 
 # Verify download
 if [[ -f "$ZIP_FILE" ]]; then
+    if ! unzip -t "$ZIP_FILE" > /dev/null 2>&1; then
+        echo "Downloaded file is corrupted."
+        rm -f "$ZIP_FILE"
+        exit 1
+    fi
     echo "Extracting cursors..."
     unzip -o "$ZIP_FILE" -d "$ICONS_DIR" >/dev/null
     echo "Cleaning up..."

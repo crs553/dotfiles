@@ -160,7 +160,7 @@ tooltip {
 }
 
 #pulseaudio.microphone {
-    color: #cba6f7;
+    color: @mauve;
     border-radius: 0px 10px 10px 0px;
     margin-right: 5px;
     padding-right: 8px;

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
 LIGHT="$HOME/.dotfiles/hypr/wallpaper-light.png"
 DARK="$HOME/.dotfiles/hypr/wallpaper-dark.png"
 CONF="$HOME/.config/hypr/hyprpaper.conf"

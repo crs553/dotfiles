@@ -105,7 +105,7 @@ jobs:
                   check(p, False, f"({e})")
 
           # zathura: `set|map key value` directives (not INI)
-          p = "zathura/zathurac"
+          p = "zathura/zathurarc"
           ok = True
           for line in open(p):
               s = line.strip()
