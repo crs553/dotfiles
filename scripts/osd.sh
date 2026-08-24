@@ -18,6 +18,13 @@ volume)
 	;;
 brightness)
 	shift
+	# Pause auto-brightness so the manual change sticks; resume after 5 min
+	if systemctl is-active --quiet illuminanced.service; then
+		systemctl stop illuminanced.service
+		systemctl stop illuminanced-resume.timer 2>/dev/null
+		systemd-run --collect --unit=illuminanced-resume --on-active=300 \
+			systemctl start illuminanced.service >/dev/null 2>&1 || true
+	fi
 	brightnessctl -d intel_backlight s "$1"
 	V=$(brightnessctl -d intel_backlight get)
 	M=$(brightnessctl -d intel_backlight max)

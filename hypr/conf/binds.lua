@@ -94,8 +94,8 @@ hl.bind(
 )
 
 -- Brightness
-hl.bind("xf86monbrightnessdown", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh brightness 10%-"))
-hl.bind("xf86monbrightnessup", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh brightness 10%+"))
+hl.bind("xf86monbrightnessdown", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh brightness 5%-"))
+hl.bind("xf86monbrightnessup", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh brightness 5%+"))
 
 -- App shortcuts
 hl.bind(M .. " + W", hl.dsp.exec_cmd("~/.dotfiles/scripts/toggle-wallpaper-light-dark.sh"))
