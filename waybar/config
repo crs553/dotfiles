@@ -2,19 +2,16 @@
   "position": "top",
   "height": 35,
   "spacing": 4,
-
   "modules-left": [
     "hyprland/workspaces",
     "hyprland/submap",
     "hyprland/language",
     "hyprland/scratchpad"
   ],
-
   "modules-center": [
     "hyprland/window",
     "mpris"
   ],
-
   "modules-right": [
     "idle_inhibitor",
     "custom/power_profile",
@@ -29,9 +26,7 @@
     "battery",
     "clock",
     "tray",
-    "custom/weather"
   ],
-
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
@@ -49,7 +44,6 @@
       "default": ""
     }
   },
-
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
@@ -57,40 +51,39 @@
       "deactivated": " "
     }
   },
-
   "tray": {
     "icon-size": 16,
     "spacing": 10
   },
-
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}",
     "on-click": "gnome-calendar"
   },
-
   "cpu": {
     "format": "{usage}% ",
     "tooltip": false,
     "on-click": "kitty --class btop -e btop"
   },
-
   "memory": {
     "format": "{}% ",
     "on-click": "kitty --class btop -e btop"
   },
-
   "temperature": {
     "critical-threshold": 80,
     "format": "{temperatureC}°C {icon}",
     "format-icons": ""
   },
-
   "backlight": {
     "format": "{percent}% {icon}",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
-
   "battery": {
     "states": {
       "warning": 30,
@@ -100,10 +93,15 @@
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
     "format-alt": "{time} {icon}",
-    "format-icons": [" ", " ", " ", " ", " "],
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ],
     "on-click": "powerprofilesctl"
   },
-
   "network": {
     "format-wifi": "{essid} ({signalStrength}%) ",
     "format-ethernet": "{ipaddr}/{cidr} ",
@@ -113,7 +111,6 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
     "on-click": "nm-connection-editor"
   },
-
   "pulseaudio": {
     "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
@@ -128,11 +125,14 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     },
     "on-click": "pavucontrol"
   },
-
   "hyprland/window": {
     "rewrite": {
       "(.*) - Brave": " Brave",
@@ -140,20 +140,19 @@
       "(.*) — Thunar": " Thunar"
     }
   },
-
   "hyprland/language": {
     "format": "{}",
     "format-en": "US",
     "on-click": "hyprctl switchxkblayout current next"
   },
-
   "hyprland/scratchpad": {
     "format": "{icon} {count}",
     "show-empty": false,
-    "format-icons": [""],
+    "format-icons": [
+      ""
+    ],
     "tooltip": true
   },
-
   "mpris": {
     "format": "{player_icon} {title}",
     "format-paused": "{status_icon} {title}",
@@ -173,7 +172,6 @@
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous"
   },
-
   "bluetooth": {
     "format": " {status}",
     "format-disabled": " ",
@@ -181,7 +179,6 @@
     "tooltip-format": "{device_alias}",
     "on-click": "blueman-manager"
   },
-
   "custom/power_profile": {
     "format": "{} {icon}",
     "format-icons": {
@@ -193,14 +190,6 @@
     "on-click": "powerprofilesctl cycle",
     "interval": 10
   },
-
-  "custom/weather": {
-    "format": "{} ",
-    "exec": "curl -s 'wttr.in?format=%c+%t' 2>/dev/null || echo 'N/A'",
-    "interval": 600,
-    "on-click": "xdg-open 'https://wttr.in'"
-  },
-
   "disk": {
     "format": "{percentage_used}% ",
     "path": "/",

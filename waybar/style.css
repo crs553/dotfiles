@@ -26,66 +26,65 @@
 @define-color crust #11111b;
 
 * {
-    border: none;
-    border-radius: 0px;
-    font-family: "DroidSansM Nerd Font";
-    font-weight: bold;
-    font-size: 12px;
-    min-height: 0;
-    transition: 0.3s;
+  border: none;
+  border-radius: 0px;
+  font-family: "DroidSansM Nerd Font";
+  font-weight: bold;
+  font-size: 12px;
+  min-height: 0;
+  transition: 0.3s;
 }
 
 window#waybar {
-    background: transparent;
-    color: @text;
+  background: transparent;
+  color: @text;
 }
 
-window#waybar > box {
-    background: @base;
-    border-radius: 10px;
-    margin: 5px;
+window#waybar>box {
+  background: @base;
+  border-radius: 10px;
+  margin: 5px;
 }
 
 tooltip {
-    background: @base;
-    border-radius: 10px;
-    border-width: 1.5px;
-    border-style: solid;
-    border-color: @crust;
-    transition: 0.3s;
+  background: @base;
+  border-radius: 10px;
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: @crust;
+  transition: 0.3s;
 }
 
 #workspaces button {
-    padding: 5px;
-    color: @overlay0;
-    margin-right: 5px;
+  padding: 5px;
+  color: @overlay0;
+  margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: @mauve;
+  color: @mauve;
 }
 
 #workspaces button.focused {
-    color: @text;
-    background: @blue;
-    border-radius: 10px;
+  color: @text;
+  background: @blue;
+  border-radius: 10px;
 }
 
 #workspaces button.urgent {
-    color: @crust;
-    background: @green;
-    border-radius: 10px;
+  color: @crust;
+  background: @green;
+  border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: @crust;
-    color: @text;
-    border-radius: 10px;
+  background: @crust;
+  color: @text;
+  border-radius: 10px;
 }
 
 #idle_inhibitor,
 #custom-power_profile,
-#custom-weather,
 #window,
 #clock,
 #battery,
@@ -102,107 +101,99 @@ tooltip {
 #disk,
 #mpris,
 #scratchpad {
-    padding: 0px 10px;
-    border-radius: 10px;
+  padding: 0px 10px;
+  border-radius: 10px;
 }
 
 #temperature.critical {
-    color: @maroon;
+  color: @maroon;
 }
 
 #backlight {
-    padding-left: 7px;
+  padding-left: 7px;
 }
 
 #tray {
-    border-radius: 10px;
-    margin-right: 5px;
-    padding: 0px 4px;
+  border-radius: 10px;
+  margin-right: 5px;
+  padding: 0px 4px;
 }
 
 #workspaces {
-    border-radius: 10px;
-    margin-left: 5px;
-    padding-right: 0px;
-    padding-left: 5px;
+  border-radius: 10px;
+  margin-left: 5px;
+  padding-right: 0px;
+  padding-left: 5px;
 }
 
 #custom-power_profile {
-    color: @mauve;
+  color: @mauve;
 }
 
 #window {
-    border-radius: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #clock {
-    color: @peach;
-    border-radius: 10px;
-    margin-left: 5px;
-    transition: 0.3s;
-    padding-left: 7px;
+  color: @peach;
+  border-radius: 10px;
+  margin-left: 5px;
+  transition: 0.3s;
+  padding-left: 7px;
 }
 
 #network {
-    color: @yellow;
+  color: @yellow;
 }
 
 #bluetooth {
-    color: @sapphire;
-    border-radius: 10px;
-    margin-right: 10px;
+  color: @sapphire;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 
 #pulseaudio {
-    color: @mauve;
+  color: @mauve;
 }
 
 #pulseaudio.microphone {
-    color: @mauve;
-    border-radius: 0px 10px 10px 0px;
-    margin-right: 5px;
-    padding-right: 8px;
+  color: @mauve;
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 5px;
+  padding-right: 8px;
 }
 
 #battery {
-    color: @green;
-    border-radius: 0 10px 10px 0;
-    margin-right: 5px;
-}
-
-#custom-weather {
-    color: @peach;
-    border-radius: 10px;
-    margin-left: 0px;
+  color: @green;
+  border-radius: 0 10px 10px 0;
+  margin-right: 5px;
 }
 
 #language {
-    color: @lavender;
-    border-radius: 10px;
-    margin-left: 5px;
-    padding-left: 7px;
-    padding-right: 7px;
+  color: @lavender;
+  border-radius: 10px;
+  margin-left: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 #disk {
-    color: @teal;
+  color: @teal;
 }
 
 #mpris {
-    color: @text;
-    border-radius: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+  color: @text;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #scratchpad {
-    color: @teal;
-    border-radius: 10px;
-    margin-left: 5px;
-    padding-left: 7px;
-    padding-right: 7px;
+  color: @teal;
+  border-radius: 10px;
+  margin-left: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
 }
-
-
