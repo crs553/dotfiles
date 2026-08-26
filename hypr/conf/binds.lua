@@ -108,6 +108,12 @@ hl.bind(M .. " + SHIFT + Z", hl.dsp.exec_cmd("signal-desktop"))
 hl.bind(M .. " + SHIFT + O", hl.dsp.exec_cmd("systemctl --user restart waybar.service"))
 hl.bind(M .. " + SHIFT + M", hl.dsp.exec_cmd("pkill hyprpaper && hyprctl dispatch exec hyprpaper"))
 
+-- Clipboard history
+hl.bind(M .. " + V", hl.dsp.exec_cmd("cliphist list | wofi --dmenu | cliphist decode | wl-copy"))
+
+-- VoxType voice-to-text (toggle: press to start, press again to stop)
+hl.bind(M .. " + SHIFT + V", hl.dsp.exec_cmd('notify-send -u low "VoxType" "Toggled" && voxtype record toggle'))
+
 -- Lid switch
 hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, disable"'))
 hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1, preferred, auto, 1.333333"'))
