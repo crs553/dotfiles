@@ -10,7 +10,8 @@
   ],
   "modules-center": [
     "hyprland/window",
-    "mpris"
+    "mpris",
+    "clock"
   ],
   "modules-right": [
     "idle_inhibitor",
@@ -24,8 +25,7 @@
     "temperature",
     "backlight",
     "battery",
-    "clock",
-    "tray",
+    "tray"
   ],
   "hyprland/workspaces": {
     "disable-scroll": true,
