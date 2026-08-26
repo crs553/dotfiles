@@ -13,6 +13,7 @@
 [user]
 	email = 42813301+crs553@users.noreply.github.com
 	name = CS
+	signingkey = 98BBCA872699070C
 [push]
 	autoSetupRemote = true
 [init]
@@ -64,3 +65,5 @@
   stashl = "stash list"
   stashp = "stash pop"
   stashs = "stash show -p"
+[commit]
+	gpgsign = true
