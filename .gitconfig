@@ -1,3 +1,15 @@
+# Git Configuration
+# =================
+# To enable GPG commit signing, add these lines:
+#   [commit]
+#     gpgsign = true
+#   [user]
+#     signingkey = YOUR_KEY_ID_HERE
+#
+# Get your key ID with: gpg --list-secret-keys --keyid-format=long
+# Then run: git config --global commit.gpgsign true
+# And: git config --global user.signingkey YOUR_KEY_ID_HERE
+
 [user]
 	email = 42813301+crs553@users.noreply.github.com
 	name = CS
