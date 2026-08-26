@@ -1,0 +1,5 @@
+theme = ""
+initial_directory = "/mnt/media/music"
+
+eq_preset = "Custom"
+eq = [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
