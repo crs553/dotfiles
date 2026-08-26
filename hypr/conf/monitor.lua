@@ -6,6 +6,15 @@ hl.monitor({
   scale = "1.333333",
 })
 
+-- GPD Pocket: portrait panel mounted left-side-up
+hl.monitor({
+  output = "DSI-1",
+  mode = "preferred",
+  position = "auto",
+  scale = "1.5",
+  transform = 3,
+})
+
 -- External monitors (update descriptions to match physical ports)
 hl.monitor({ output = "DP-1", mode = "preferred", position = "auto", scale = "1" }) -- e.g. Left
 hl.monitor({ output = "DP-2", mode = "preferred", position = "auto", scale = "1" }) -- e.g. Center
