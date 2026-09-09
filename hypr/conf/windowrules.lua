@@ -74,8 +74,9 @@ float_at("Viewnior", "50% 60%")
 
 -- Floating: title-based dialogs (float + size + center)
 float_title("Media viewer", "45% 55%")
-float_title("Volume Control")
+float_title("Volume Control", "25% 30%")
 float_title("DevTools", "45% 50%")
+float_at("nngceckbapebfimnlniiiahkandclblb", "35% 45%")
 
 -- Picture-in-Picture (regex)
 hl.window_rule({ match = { title = "Picture[- ]in[- ][Pp]icture" }, keep_aspect_ratio = true })
