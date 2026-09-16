@@ -99,7 +99,7 @@ hl.bind("xf86monbrightnessup", hl.dsp.exec_cmd("~/.dotfiles/scripts/osd.sh brigh
 
 -- App shortcuts
 hl.bind(M .. " + W", hl.dsp.exec_cmd("~/.dotfiles/scripts/toggle-wallpaper-light-dark.sh"))
-hl.bind(M .. " + B", hl.dsp.exec_cmd("brave"))
+hl.bind(M .. " + B", hl.dsp.exec_cmd("flatpak run org.mozilla.firefox"))
 hl.bind(M .. " + SHIFT + B", hl.dsp.exec_cmd("mullvad-browser"))
 hl.bind(M .. " + SHIFT + Escape", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(M .. " + SHIFT + Z", hl.dsp.exec_cmd("signal-desktop"))
