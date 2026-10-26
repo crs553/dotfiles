@@ -1,0 +1,200 @@
+{
+  "position": "top",
+  "height": 38,
+  "spacing": 0,
+  "fixed-center": true,
+  "reload_style_on_change": true,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/scratchpad",
+    "hyprland/language",
+    "hyprland/submap"
+  ],
+  "modules-center": [
+    "mpris",
+    "clock"
+  ],
+  "modules-right": [
+    "custom/vitals",
+    "network",
+    "bluetooth",
+    "wireplumber",
+    "custom/backlight",
+    "battery",
+    "privacy",
+    "systemd-failed-units"
+  ],
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "warp-on-scroll": false,
+    "format": "{name} {icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "default": ""
+    },
+    "on-click": "activate",
+    "tooltip": false
+  },
+
+  "custom/scratchpad": {
+    "exec": "${WAYBAR_SCRIPTS:-$HOME/.config/waybar/scripts}/scratchpad.sh",
+    "interval": 2,
+    "tooltip": true,
+    "on-click": "hyprctl dispatch togglespecialworkspace magic"
+  },
+
+  "hyprland/language": {
+    "format": "{short}",
+    "on-click": "hyprctl switchxkblayout current next"
+  },
+
+  "hyprland/submap": {
+    "format": "{}"
+  },
+
+  "mpris": {
+    "format": "{player_icon} {title}",
+    "format-paused": "{status_icon} {title}",
+    "player-icons": {
+      "default": "",
+      "spotify": "",
+      "firefox": "",
+      "brave": "",
+      "mpv": ""
+    },
+    "status-icons": {
+      "playing": "",
+      "paused": ""
+    },
+    "max-length": 38,
+    "tooltip-format": "{player} · {status}\n{dynamic}",
+    "interval": 1
+  },
+
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%a %d %b}",
+    "tooltip-format": "<span foreground='#cba6f7'><big>{:%B %Y}</big></span>\n<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span foreground='#cba6f7'><b>{}</b></span>",
+        "days": "<span foreground='#cdd6f4'>{}</span>",
+        "weekdays": "<span foreground='#7f849c'>{}</span>",
+        "today": "<span foreground='#1e1e2e' background='#cba6f7'><b> {} </b></span>"
+      }
+    }
+  },
+
+  "custom/vitals": {
+    "exec": "${WAYBAR_SCRIPTS:-$HOME/.config/waybar/scripts}/vitals.py",
+    "return-type": "json",
+    "interval": 3,
+    "on-click": "kitty --class btop -e btop",
+    "tooltip": true
+  },
+
+  "network": {
+    "interval": 5,
+    "format-wifi": "<span foreground='#cba6f7'></span>",
+    "format-ethernet": "<span foreground='#cba6f7'></span>",
+    "format-linked": "<span foreground='#cba6f7'></span>",
+    "format-disconnected": "<span foreground='#f38ba8'>⚠</span>",
+    "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname} · {ipaddr}/{cidr}\nvia {gwaddr}",
+    "tooltip-format-linked": "{ifname} (no IP)",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "nm-connection-editor"
+  },
+
+  "bluetooth": {
+    "interval": 5,
+    "format": "",
+    "format-connected": "",
+    "format-on": "",
+    "format-off": "",
+    "format-disabled": "",
+    "format-no-controller": "",
+    "tooltip-format": "{controller_alias}",
+    "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
+    "on-click": "blueman-manager"
+  },
+
+  "wireplumber": {
+    "format": "<span foreground='#cba6f7'>{icon}</span>",
+    "format-muted": "",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
+    "tooltip-format": "{node_name} · {volume}%",
+    "on-click": "pavucontrol",
+    "scroll-step": 5,
+    "max-volume": 130
+  },
+
+  "custom/backlight": {
+    "exec": "${WAYBAR_SCRIPTS:-$HOME/.config/waybar/scripts}/backlight.sh",
+    "interval": 1,
+    "on-scroll-up": "brightnessctl -q set 5%+",
+    "on-scroll-down": "brightnessctl -q set 5%-"
+  },
+
+  "battery": {
+    "interval": 30,
+    "states": {
+      "warning": 25,
+      "critical": 10
+    },
+    "format": "<span foreground='#cba6f7'>{icon}</span> {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip-format": "{capacity}% · {time}\n{health}% health · {cycles} cycles"
+  },
+
+  "privacy": {
+    "icon-size": 16,
+    "icon-spacing": 6,
+    "transition-duration": 150,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 18
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 18
+      }
+    ]
+  },
+
+  "systemd-failed-units": {
+    "hide-on-ok": true,
+    "format": " {nr_failed}",
+    "on-click": "kitty --hold --class systemd-failed -e \"$HOME/.config/waybar/scripts/failed-units.sh\""
+  }
+}

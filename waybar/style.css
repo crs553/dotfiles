@@ -1,3 +1,4 @@
+/* ── Catppuccin Mocha ─────────────────────────────────────────────── */
 @define-color rosewater #f5e0dc;
 @define-color flamingo #f2cdcd;
 @define-color pink #f5c2e7;
@@ -25,14 +26,15 @@
 @define-color mantle #181825;
 @define-color crust #11111b;
 
+/* ── Base ─────────────────────────────────────────────────────────── */
 * {
   border: none;
-  border-radius: 0px;
-  font-family: "DroidSansM Nerd Font";
-  font-weight: bold;
-  font-size: 12px;
+  border-radius: 0;
+  font-family: "DroidSansM Nerd Font", "0xProto Nerd Font Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
   min-height: 0;
-  transition: 0.3s;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
 window#waybar {
@@ -40,160 +42,217 @@ window#waybar {
   color: @text;
 }
 
-window#waybar>box {
-  background: @base;
-  border-radius: 10px;
-  margin: 5px;
+window#waybar > box {
+  background: transparent;
+  margin: 0;
+  padding: 0;
 }
 
-tooltip {
-  background: @base;
-  border-radius: 10px;
-  border-width: 1.5px;
-  border-style: solid;
-  border-color: @crust;
-  transition: 0.3s;
+/* ── Floating islands ─────────────────────────────────────────────── */
+.modules-left,
+.modules-center,
+.modules-right {
+  background-color: rgba(30, 30, 46, 0.86);
+  border: 1px solid rgba(203, 166, 247, 0.16);
+  border-radius: 12px;
+  min-height: 28px;
+  margin: 4px 0;
+  padding: 0 7px;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+/* ── Shared spacing ───────────────────────────────────────────────── */
+#workspaces,
+#custom-scratchpad,
+#language,
+#submap,
+#mpris,
+#clock,
+#custom-vitals,
+#network,
+#bluetooth,
+#wireplumber,
+#custom-backlight,
+#battery,
+#privacy,
+#systemd-failed-units {
+  padding: 0 7px;
+}
+
+/* ── Workspaces ───────────────────────────────────────────────────── */
+#workspaces {
+  padding: 0 4px;
 }
 
 #workspaces button {
-  padding: 5px;
+  padding: 0 4px;
+  margin: 0;
+  min-width: 20px;
+  font-size: 13px;
   color: @overlay0;
-  margin-right: 5px;
+  background: transparent;
+  box-shadow: none;
+}
+
+#workspaces button.empty {
+  color: @surface2;
 }
 
 #workspaces button.active {
   color: @mauve;
 }
 
-#workspaces button.focused {
-  color: @text;
-  background: @blue;
-  border-radius: 10px;
-}
-
 #workspaces button.urgent {
-  color: @crust;
-  background: @green;
-  border-radius: 10px;
+  color: @red;
 }
 
 #workspaces button:hover {
-  background: @crust;
   color: @text;
-  border-radius: 10px;
+  background: transparent;
 }
 
-#idle_inhibitor,
-#custom-power_profile,
-#window,
-#clock,
-#battery,
-#pulseaudio,
-#network,
-#cpu,
-#memory,
-#bluetooth,
-#temperature,
-#workspaces,
-#tray,
-#backlight,
-#language,
-#disk,
-#mpris,
-#scratchpad {
-  padding: 0px 10px;
-  border-radius: 10px;
+/* ── Left island ──────────────────────────────────────────────────── */
+#custom-scratchpad {
+  color: @teal;
 }
 
-#temperature.critical {
-  color: @maroon;
+#language {
+  color: @overlay1;
+  font-size: 11px;
+  letter-spacing: 0.5px;
 }
 
-#backlight {
-  padding-left: 7px;
-}
-
-#tray {
-  border-radius: 10px;
-  margin-right: 5px;
-  padding: 0px 4px;
-}
-
-#workspaces {
-  border-radius: 10px;
-  margin-left: 5px;
-  padding-right: 0px;
-  padding-left: 5px;
-}
-
-#custom-power_profile {
+#submap {
+  margin: 4px 4px 4px 2px;
+  padding: 0 7px;
   color: @mauve;
+  font-size: 11px;
+  background: rgba(203, 166, 247, 0.12);
+  border-radius: 6px;
 }
 
-#window {
-  border-radius: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
+/* ── Center island ────────────────────────────────────────────────── */
 #clock {
+  color: @mauve;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+#mpris {
+  color: @subtext0;
+}
+
+#mpris.playing {
+  color: @subtext1;
+}
+
+#mpris.paused {
+  color: @overlay1;
+}
+
+/* ── Right island ─────────────────────────────────────────────────── */
+#custom-vitals {
+  color: @subtext1;
+}
+
+#custom-vitals.warning {
   color: @peach;
-  border-radius: 10px;
-  margin-left: 5px;
-  transition: 0.3s;
-  padding-left: 7px;
+}
+
+#custom-vitals.critical {
+  color: @red;
 }
 
 #network {
-  color: @yellow;
+  color: @text;
+}
+
+#network.disconnected {
+  color: @overlay0;
 }
 
 #bluetooth {
   color: @sapphire;
-  border-radius: 10px;
-  margin-right: 10px;
 }
 
-#pulseaudio {
-  color: @mauve;
+/* Keep the bluetooth widget at zero width unless a device is connected. */
+#bluetooth.off,
+#bluetooth.disabled,
+#bluetooth.on,
+#bluetooth.no-controller {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
 }
 
-#pulseaudio.microphone {
-  color: @mauve;
-  border-radius: 0px 10px 10px 0px;
-  margin-right: 5px;
-  padding-right: 8px;
+#wireplumber {
+  color: @text;
+}
+
+#wireplumber.muted {
+  color: @overlay0;
+}
+
+#custom-backlight {
+  color: @text;
 }
 
 #battery {
+  color: @subtext1;
+}
+
+#battery.charging,
+#battery.plugged {
   color: @green;
-  border-radius: 0 10px 10px 0;
-  margin-right: 5px;
 }
 
-#language {
-  color: @lavender;
+#battery.warning {
+  color: @peach;
+}
+
+#battery.critical {
+  color: @red;
+}
+
+#privacy {
+  color: @peach;
+}
+
+#systemd-failed-units {
+  color: @red;
+}
+
+/* ── Hover ────────────────────────────────────────────────────────── */
+#custom-vitals:hover,
+#network:hover,
+#bluetooth:hover,
+#wireplumber:hover,
+#custom-backlight:hover,
+#battery:hover,
+#privacy:hover,
+#systemd-failed-units:hover,
+#clock:hover {
+  background: rgba(203, 166, 247, 0.10);
+  border-radius: 8px;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────────── */
+tooltip {
+  background: @mantle;
+  border: 1px solid rgba(203, 166, 247, 0.28);
   border-radius: 10px;
-  margin-left: 5px;
-  padding-left: 7px;
-  padding-right: 7px;
 }
 
-#disk {
-  color: @teal;
-}
-
-#mpris {
-  color: @text;
-  border-radius: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-#scratchpad {
-  color: @teal;
-  border-radius: 10px;
-  margin-left: 5px;
-  padding-left: 7px;
-  padding-right: 7px;
+tooltip label {
+  color: @subtext1;
+  font-family: "DroidSansM Nerd Font", "0xProto Nerd Font Mono", monospace;
+  font-size: 13px;
 }
