@@ -82,19 +82,20 @@ window#waybar > box {
 #custom-backlight,
 #battery,
 #privacy,
-#systemd-failed-units {
+#systemd-failed-units,
+#idle_inhibitor {
   padding: 0 7px;
 }
 
 /* ── Workspaces ───────────────────────────────────────────────────── */
 #workspaces {
-  padding: 0 4px;
+  padding: 0 6px;
 }
 
 #workspaces button {
-  padding: 0 4px;
-  margin: 0;
-  min-width: 20px;
+  padding: 0 6px;
+  margin: 0 2px;
+  min-width: 22px;
   font-size: 13px;
   color: @overlay0;
   background: transparent;
@@ -183,16 +184,6 @@ window#waybar > box {
   color: @sapphire;
 }
 
-/* Keep the bluetooth widget at zero width unless a device is connected. */
-#bluetooth.off,
-#bluetooth.disabled,
-#bluetooth.on,
-#bluetooth.no-controller {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-}
-
 #wireplumber {
   color: @text;
 }
@@ -230,6 +221,14 @@ window#waybar > box {
   color: @red;
 }
 
+#idle_inhibitor {
+  color: @overlay1;
+}
+
+#idle_inhibitor.activated {
+  color: @green;
+}
+
 /* ── Hover ────────────────────────────────────────────────────────── */
 #custom-vitals:hover,
 #network:hover,
@@ -239,6 +238,7 @@ window#waybar > box {
 #battery:hover,
 #privacy:hover,
 #systemd-failed-units:hover,
+#idle_inhibitor:hover,
 #clock:hover {
   background: rgba(203, 166, 247, 0.10);
   border-radius: 8px;

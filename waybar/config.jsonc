@@ -23,8 +23,19 @@
     "custom/backlight",
     "battery",
     "privacy",
-    "systemd-failed-units"
+    "systemd-failed-units",
+    "idle_inhibitor"
   ],
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    },
+    "tooltip-format-activated": "Idle inhibitor: active",
+    "tooltip-format-deactivated": "Idle inhibitor: inactive"
+  },
 
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -113,24 +124,26 @@
     "format-ethernet": "<span foreground='#cba6f7'></span>",
     "format-linked": "<span foreground='#cba6f7'></span>",
     "format-disconnected": "<span foreground='#f38ba8'>⚠</span>",
-    "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ipaddr}/{cidr}",
-    "tooltip-format-ethernet": "{ifname} · {ipaddr}/{cidr}\nvia {gwaddr}",
-    "tooltip-format-linked": "{ifname} (no IP)",
-    "tooltip-format-disconnected": "Disconnected",
-    "on-click": "nm-connection-editor"
+    "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ipaddr}/{cidr}\nLeft: nm-connection-editor | Right: nmtui",
+    "tooltip-format-ethernet": "{ifname} · {ipaddr}/{cidr}\nvia {gwaddr}\nLeft: nm-connection-editor | Right: nmtui",
+    "tooltip-format-linked": "{ifname} (no IP)\nLeft: nm-connection-editor | Right: nmtui",
+    "tooltip-format-disconnected": "Disconnected\nLeft: nm-connection-editor | Right: nmtui",
+    "on-click": "nm-connection-editor",
+    "on-click-right": "kitty --class network-picker -e nmtui"
   },
 
   "bluetooth": {
     "interval": 5,
     "format": "",
-    "format-connected": "",
-    "format-on": "",
-    "format-off": "",
-    "format-disabled": "",
+    "format-connected": " {num_connections}",
+    "format-on": "",
+    "format-off": "",
+    "format-disabled": "",
     "format-no-controller": "",
-    "tooltip-format": "{controller_alias}",
-    "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
-    "on-click": "blueman-manager"
+    "tooltip-format": "{controller_alias}\nLeft: blueman-manager | Right: bluetoothctl",
+    "tooltip-format-connected": "{controller_alias}\n{device_enumerate}\nLeft: blueman-manager | Right: bluetoothctl",
+    "on-click": "blueman-manager",
+    "on-click-right": "kitty --class bluetooth-picker -e bluetoothctl"
   },
 
   "wireplumber": {
