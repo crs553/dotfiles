@@ -4,7 +4,6 @@
   "spacing": 0,
   "fixed-center": true,
   "reload_style_on_change": true,
-
   "modules-left": [
     "hyprland/workspaces",
     "custom/scratchpad",
@@ -24,9 +23,9 @@
     "battery",
     "privacy",
     "systemd-failed-units",
-    "idle_inhibitor"
+    "idle_inhibitor",
+    "tray"
   ],
-
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
@@ -36,7 +35,11 @@
     "tooltip-format-activated": "Idle inhibitor: active",
     "tooltip-format-deactivated": "Idle inhibitor: inactive"
   },
-
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8,
+    "show-passive-items": true
+  },
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
@@ -56,23 +59,19 @@
     "on-click": "activate",
     "tooltip": false
   },
-
   "custom/scratchpad": {
     "exec": "${WAYBAR_SCRIPTS:-$HOME/.config/waybar/scripts}/scratchpad.sh",
     "interval": 2,
     "tooltip": true,
     "on-click": "hyprctl dispatch togglespecialworkspace magic"
   },
-
   "hyprland/language": {
     "format": "{short}",
     "on-click": "hyprctl switchxkblayout current next"
   },
-
   "hyprland/submap": {
     "format": "{}"
   },
-
   "mpris": {
     "format": "{player_icon} {title}",
     "format-paused": "{status_icon} {title}",
@@ -91,7 +90,6 @@
     "tooltip-format": "{player} · {status}\n{dynamic}",
     "interval": 1
   },
-
   "clock": {
     "format": "{:%H:%M}",
     "format-alt": "{:%a %d %b}",
@@ -109,7 +107,6 @@
       }
     }
   },
-
   "custom/vitals": {
     "exec": "${WAYBAR_SCRIPTS:-$HOME/.config/waybar/scripts}/vitals.py",
     "return-type": "json",
@@ -117,7 +114,6 @@
     "on-click": "kitty --class btop -e btop",
     "tooltip": true
   },
-
   "network": {
     "interval": 5,
     "format-wifi": "<span foreground='#cba6f7'></span>",
@@ -131,7 +127,6 @@
     "on-click": "nm-connection-editor",
     "on-click-right": "kitty --class network-picker -e nmtui"
   },
-
   "bluetooth": {
     "interval": 5,
     "format": "",
@@ -145,7 +140,6 @@
     "on-click": "blueman-manager",
     "on-click-right": "kitty --class bluetooth-picker -e bluetoothctl"
   },
-
   "wireplumber": {
     "format": "<span foreground='#cba6f7'>{icon}</span>",
     "format-muted": "",
@@ -159,14 +153,12 @@
     "scroll-step": 5,
     "max-volume": 130
   },
-
   "custom/backlight": {
     "exec": "${WAYBAR_SCRIPTS:-$HOME/.config/waybar/scripts}/backlight.sh",
     "interval": 1,
     "on-scroll-up": "brightnessctl -q set 5%+",
     "on-scroll-down": "brightnessctl -q set 5%-"
   },
-
   "battery": {
     "interval": 30,
     "states": {
@@ -186,7 +178,6 @@
     ],
     "tooltip-format": "{capacity}% · {time}\n{health}% health · {cycles} cycles"
   },
-
   "privacy": {
     "icon-size": 16,
     "icon-spacing": 6,
@@ -204,7 +195,6 @@
       }
     ]
   },
-
   "systemd-failed-units": {
     "hide-on-ok": true,
     "format": " {nr_failed}",

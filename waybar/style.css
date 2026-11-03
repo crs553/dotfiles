@@ -42,7 +42,7 @@ window#waybar {
   color: @text;
 }
 
-window#waybar > box {
+window#waybar>box {
   background: transparent;
   margin: 0;
   padding: 0;
@@ -227,6 +227,33 @@ window#waybar > box {
 
 #idle_inhibitor.activated {
   color: @green;
+}
+
+/* ── Tray -────────────────────────────────────────────────────────── */
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#tray menu {
+  background: @mantle;
+  color: @text;
+  border: 1px solid rgba(203, 166, 247, 0.28);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+#tray menu menuitem {
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+#tray menu menuitem:hover {
+  background: rgba(203, 166, 247, 0.16);
 }
 
 /* ── Hover ────────────────────────────────────────────────────────── */
