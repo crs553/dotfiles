@@ -1,19 +1,18 @@
 # Git Configuration
 # =================
-# To enable GPG commit signing, add these lines:
-#   [commit]
-#     gpgsign = true
-#   [user]
-#     signingkey = YOUR_KEY_ID_HERE
-#
-# Get your key ID with: gpg --list-secret-keys --keyid-format=long
-# Then run: git config --global commit.gpgsign true
-# And: git config --global user.signingkey YOUR_KEY_ID_HERE
+# Commit and tag signing use SSH via the Bitwarden desktop SSH agent.
+# The private key stays in Bitwarden; user.signingkey is its public key.
+# Add the same public key as a signing key in Forgejo/GitHub.
+
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
 
 [user]
 	email = 42813301+crs553@users.noreply.github.com
 	name = CS
-	signingkey = 98BBCA872699070C
+	signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqsrWATeLa8GFEHaiD1f7xnOgVt29CTIBKhzlHwPXey SSH Key Laptop"
 [push]
 	autoSetupRemote = true
 [init]
@@ -67,3 +66,5 @@
   stashs = "stash show -p"
 [commit]
 	gpgsign = true
+[tag]
+	gpgSign = true
