@@ -10,9 +10,9 @@
 	allowedSignersFile = ~/.config/git/allowed_signers
 
 [user]
-	email = 42813301+crs553@users.noreply.github.com
-	name = CS
-	signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqsrWATeLa8GFEHaiD1f7xnOgVt29CTIBKhzlHwPXey SSH Key Laptop"
+	email = dev@charlierstubbs.com
+  name = CS
+  signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqsrWATeLa8GFEHaiD1f7xnOgVt29CTIBKhzlHwPXey"
 [push]
 	autoSetupRemote = true
 [init]
