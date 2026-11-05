@@ -5,9 +5,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -64,7 +61,7 @@ jobs:
                   errors.append(name)
 
           # Single-document JSON
-          for p in ["waybar/config"]:
+          for p in ["waybar/config.jsonc"]:
               try:
                   json.load(open(p))
                   check(p, True)
@@ -97,12 +94,24 @@ jobs:
               check("starship.toml", False, f"({e})")
 
           # INI
-          for p in ["dunst/dunstrc", "gtk-3.0/settings.ini"]:
+          for p in ["gtk-3.0/settings.ini"]:
               try:
                   configparser.ConfigParser().read(p)
                   check(p, True)
               except Exception as e:
                   check(p, False, f"({e})")
+
+          # mako: top-level key=value lines plus [section] headers
+          p = "mako/config"
+          ok = True
+          for line in open(p):
+              s = line.strip()
+              if not s or s.startswith("#"):
+                  continue
+              if not re.match(r"^(\[[^\]]+\]|[^=\s][^=]*=.*)$", s):
+                  ok = False
+                  print(f"   unexpected line: {line.rstrip()}")
+          check(p, ok)
 
           # zathura: `set|map key value` directives (not INI)
           p = "zathura/zathurarc"
@@ -171,7 +180,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
-            ca-certificates curl dunst waybar wofi wlogout \
+            ca-certificates curl dbus mako-notifier waybar wofi wlogout \
             lua5.4 zsh python3
           echo "deb http://deb.debian.org/debian trixie-backports main" \
             > /etc/apt/sources.list.d/trixie-backports.list
@@ -214,7 +223,7 @@ jobs:
           check("waybar", shutil.which("waybar") is not None)
           check("wofi", shutil.which("wofi") is not None)
           check("wlogout", shutil.which("wlogout") is not None)
-          check("dunst", shutil.which("dunst") is not None)
+          check("mako", shutil.which("mako") is not None)
 
           sys.exit(1 if errors else 0)
           EOF
@@ -225,7 +234,7 @@ jobs:
           useradd -m smoke
           mkdir -p /tmp/runtime-smoke /home/smoke/.config
           chown -R smoke:smoke /tmp/runtime-smoke /home/smoke/.config
-          for d in dunst waybar wofi wlogout hypr; do
+          for d in mako waybar wofi wlogout hypr; do
             cp -r "$d" /home/smoke/.config/
           done
           chown -R smoke:smoke /home/smoke/.config
@@ -266,15 +275,17 @@ jobs:
 
           fail=0
 
-          timeout 8 dunst -config "$XDG_CONFIG_HOME/dunst/dunstrc" -verbosity crit 2>/tmp/dunst.err || rc=$?
+          rc=0
+          timeout 8 mako -c "$XDG_CONFIG_HOME/mako/config" 2>/tmp/mako.err || rc=$?
           rc=${rc:-0}
           if [ "$rc" != 124 ]; then
-            echo "::error::dunst exited early (rc=$rc)"; cat /tmp/dunst.err; fail=1
-          elif grep -qi "unknown setting\|invalid setting" /tmp/dunst.err; then
-            echo "::error::dunst reported invalid settings"; cat /tmp/dunst.err; fail=1
+            echo "::error::mako exited early (rc=$rc)"; cat /tmp/mako.err; fail=1
+          elif grep -qi "invalid option\|unknown option\|invalid setting\|unknown setting" /tmp/mako.err; then
+            echo "::error::mako reported invalid settings"; cat /tmp/mako.err; fail=1
           fi
 
-          timeout 10 waybar -c "$XDG_CONFIG_HOME/waybar/config" -s "$XDG_CONFIG_HOME/waybar/style.css" -l trace 2>/tmp/waybar.err || rc=$?
+          rc=0
+          timeout 10 waybar -c "$XDG_CONFIG_HOME/waybar/config.jsonc" -s "$XDG_CONFIG_HOME/waybar/style.css" -l trace 2>/tmp/waybar.err || rc=$?
           rc=${rc:-0}
           if [ "$rc" != 124 ]; then
             echo "::error::waybar exited early (rc=$rc)"; cat /tmp/waybar.err; fail=1
@@ -282,12 +293,14 @@ jobs:
             echo "::error::waybar config error"; cat /tmp/waybar.err; fail=1
           fi
 
+          rc=0
           timeout 6 wofi --conf "$XDG_CONFIG_HOME/wofi/config" --style "$XDG_CONFIG_HOME/wofi/style.css" --show drun 2>/tmp/wofi.err || rc=$?
           rc=${rc:-0}
           if [ "$rc" != 124 ]; then
             echo "::error::wofi exited early (rc=$rc)"; cat /tmp/wofi.err; fail=1
           fi
 
+          rc=0
           timeout 6 wlogout 2>/tmp/wlogout.err || rc=$?
           rc=${rc:-0}
           if [ "$rc" != 124 ]; then
@@ -300,4 +313,4 @@ jobs:
           exit $fail
           SH
           chmod +x /tmp/smoke.sh
-          su smoke -s /bin/bash -c /tmp/smoke.sh
+          su smoke -s /bin/bash -c "dbus-run-session -- /tmp/smoke.sh"

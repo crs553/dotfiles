@@ -11,8 +11,8 @@
 
 [user]
 	email = dev@charlierstubbs.com
-  name = CS
-  signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqsrWATeLa8GFEHaiD1f7xnOgVt29CTIBKhzlHwPXey"
+	name = CS
+	signingkey = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIqsrWATeLa8GFEHaiD1f7xnOgVt29CTIBKhzlHwPXey"
 [push]
 	autoSetupRemote = true
 [init]
@@ -20,50 +20,50 @@
 [core]
 	editor = nvim -f
 [alias]
-  a = add
-  aa = add --all
-  ap = add --patch
+	a = add
+	aa = add --all
+	ap = add --patch
 
-  br = branch
-  bl = blame
+	br = branch
+	bl = blame
 
-  cl = clone
+	cl = clone
 
-  comm = commit -m
-  ca = commit --amend
-  can = commit --amend --no-edit
+	comm = commit -m
+	ca = commit --amend
+	can = commit --amend --no-edit
 
-  co = checkout
-  cp = cherry-pick
+	co = checkout
+	cp = cherry-pick
 
-  df = diff
-  dfn = diff --name-only
+	df = diff
+	dfn = diff --name-only
 
-  ft = fetch -p
+	ft = fetch -p
 
-  glf = "log -1 --oneline --"
-  gsf = "log -p -1 --"
-  glog = "log --date-order --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'"
-  graph = "log --oneline --graph --decorate --all"
+	glf = "log -1 --oneline --"
+	gsf = "log -p -1 --"
+	glog = "log --date-order --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'"
+	graph = "log --oneline --graph --decorate --all"
 
-  last = "log -1 --stat"
+	last = "log -1 --stat"
 
-  p = push
-  pf = "push --force-with-lease"
-  pl = "pull --rebase"
+	p = push
+	pf = "push --force-with-lease"
+	pl = "pull --rebase"
 
-  rc = rebase --continue
-  ra = rebase --abort
-  ri = "rebase -i"
+	rc = rebase --continue
+	ra = rebase --abort
+	ri = "rebase -i"
 
-  sh = show
+	sh = show
 
-  st = status
+	st = status
 
-  stash = "stash --all"
-  stashl = "stash list"
-  stashp = "stash pop"
-  stashs = "stash show -p"
+	stash = "stash --all"
+	stashl = "stash list"
+	stashp = "stash pop"
+	stashs = "stash show -p"
 [commit]
 	gpgsign = true
 [tag]
