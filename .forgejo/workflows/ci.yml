@@ -180,14 +180,13 @@ jobs:
 
       - name: Install toolchain
         run: |
-          apt-get update
+          echo "deb http://deb.debian.org/debian trixie-backports main" \
+            > /etc/apt/sources.list.d/trixie-backports.list
+          apt-get -o Acquire::Languages=none update
           apt-get install -y --no-install-recommends \
             ca-certificates curl dbus mako-notifier waybar wofi wlogout \
             lua5.4 zsh python3
-          echo "deb http://deb.debian.org/debian trixie-backports main" \
-            > /etc/apt/sources.list.d/trixie-backports.list
-          apt-get update
-          apt-get install -y -t trixie-backports hyprland
+          apt-get install -y --no-install-recommends -t trixie-backports hyprland
 
       - name: Asset and command integrity
         run: |
