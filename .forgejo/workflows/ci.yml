@@ -154,18 +154,20 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Install linters
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends shellcheck shfmt lua-check
+
       - name: Shellcheck + shfmt
-        uses: luizm/action-sh-checker@v0.10.0
-        with:
-          # create-cursor.sh is zsh; shellcheck hard-errors on zsh shebangs (SC1071)
-          sh_checker_exclude: create-cursor.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # create-cursor.sh is zsh and intentionally not matched here;
+          # shellcheck hard-errors on zsh shebangs (SC1071).
+          shellcheck scripts/*.sh
+          shfmt -d scripts/*.sh
 
       - name: Luacheck
-        uses: lunarmodules/luacheck@v1
-        with:
-          args: hypr wezterm
+        run: luacheck hypr wezterm
 
   build:
     name: Build (smoke test)
