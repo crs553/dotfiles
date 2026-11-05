@@ -213,8 +213,8 @@ jobs:
                   path = line.split("=", 1)[1].strip()
                   check(f"hyprpaper asset {path}", os.path.exists(resolve(path)))
 
-          # Referenced commands in wlogout layout (skip OS-provided commands)
-          skip = {"loginctl", "systemctl"}
+          # Referenced commands in wlogout layout (skip host/session-provided commands)
+          skip = {"loginctl", "systemctl", "uwsm"}
           for line in open("wlogout/layout"):
               if '"action"' in line:
                   cmd = line.split('"')[-2].split()[0].lstrip('"')
